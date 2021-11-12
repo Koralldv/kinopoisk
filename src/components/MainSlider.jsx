@@ -11,12 +11,22 @@ const Wrapper = styled.div`
     width: 100vw;
     height: 100vh;
     padding: 0 2rem;
-    // background-color: var(--colors-bg);
-    // background-color: red;
-
     display: flex;
     align-items: center;
     position: relative;
+    z-index: 2;
+`;
+
+const Rgba_bg = styled.div`
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    background: var(--colors-bg);
+    z-index: -1;
+    width: 40%;
+    // filter: blur(20px);
 `;
 
 const Img = styled.img`
@@ -24,6 +34,7 @@ const Img = styled.img`
     width: 100%;
     height: 100%;
     position: absolute;
+    z-index: 0;
 `;
 
 const Film = styled.div`
@@ -119,6 +130,7 @@ export const MainSlider = () => {
                 <SwiperSlide key={`${item.title}_${index}`}>
                     <Img src={item.img} />
                     <Wrapper>
+                        <Rgba_bg />
                         <Film>
                             <FilmTitle>{item.title}</FilmTitle>
 
