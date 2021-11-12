@@ -12,20 +12,22 @@ export const Header = () => {
         document.body.setAttribute('data-theme', theme);
     }, [theme]);
 
+    const setActive = ({ isActive }) => (isActive ? 'activeLink' : '');
+
     return (
         <Wrapper>
             <Head>
                 <Menu>
-                    <NavLink to="/">
+                    <NavLink className={setActive} to="/">
                         <MenuItem>HOME</MenuItem>
                     </NavLink>
-                    <NavLink to="/movie">
+                    <NavLink className={setActive} to="/movie">
                         <MenuItem>MOVIES</MenuItem>
                     </NavLink>
-                    <NavLink to="/shows">
+                    <NavLink className={setActive} to="/shows">
                         <MenuItem>SHOWS</MenuItem>
                     </NavLink>
-                    <NavLink to="/about">
+                    <NavLink className={setActive} to="/about">
                         <MenuItem>ABOUT</MenuItem>
                     </NavLink>
                 </Menu>
