@@ -38,7 +38,7 @@ const MenuItem = styled.a.attrs({
     font-weight: var(--fw-normal);
 
     &: hover {
-        background: green;
+        background: red;
     }
 `;
 
