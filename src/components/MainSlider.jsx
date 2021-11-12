@@ -1,0 +1,143 @@
+import styled from 'styled-components';
+import React from 'react';
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react';
+// Import Swiper styles
+
+import 'swiper/swiper-bundle.min.css';
+import 'swiper/swiper.min.css';
+
+const Wrapper = styled.div`
+    width: 100vw;
+    height: 100vh;
+    padding: 0 2rem;
+    // background-color: var(--colors-bg);
+    // background-color: red;
+
+    display: flex;
+    align-items: center;
+    position: relative;
+`;
+
+const Img = styled.img`
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+`;
+
+const Film = styled.div`
+    width: 100%;
+    max-width: 500px;
+`;
+
+const FilmTitle = styled.h1`
+    font-size: var(--fz-xl);
+    font-weight: var(--fw-bold);
+    margin: 0;
+`;
+
+const Digits = styled.div`
+    margin: 1rem 0;
+    display: flex;
+    // justify-content: space-between;
+    align-items: center;
+`;
+
+const Year = styled.span`
+    margin-right: 1rem;
+    color: var(--colors-text);
+    font-weight: var(--fw-normal);
+    font-size: var(--fz-md);
+`;
+
+const Age = styled.span`
+    margin-right: 1rem;
+    color: var(--colors-text);
+    font-weight: var(--fw-normal);
+    font-size: var(--fz-md);
+    border: 2px solid red;
+    padding: 5px 10px;
+    border-radius: 50px;
+`;
+
+const Duration = styled.span`
+    margin-right: 1rem;
+    color: var(--colors-text);
+    font-weight: var(--fw-normal);
+    font-size: var(--fz-md);
+`;
+
+const Desc = styled.p`
+    margin: 0 0 2rem 0;
+    color: var(--colors-text);
+    font-weight: var(--fw-normal);
+`;
+
+const Buttons = styled.div``;
+
+const Button = styled.button`
+    background-color: var(--colors-ui-base);
+    border: none;
+    border-radius: var(--radii);
+    box-shadow: var(--shadow);
+    padding: 1rem 2rem;
+    cursor: pointer;
+    margin-right: 1rem;
+    color: var(--color-text);
+`;
+
+const filmsSlider = [
+    {
+        title: 'THE EARTH',
+        desc: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptate harum aperiam labore! Commodi officia ipsam libero possimus.',
+        img: 'https://www.film.ru/sites/default/files/images/49435960-1135677.jpg',
+        list: [{ year: '2021', age: '18', duration: '2h 6m' }],
+    },
+    {
+        title: 'THE EARTH 2',
+        desc: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptate harum aperiam labore! Commodi officia ipsam libero possimus.',
+        img: 'https://www.film.ru/sites/default/files/images/49435960-1135677.jpg',
+        list: [{ year: '2021', age: '18', duration: '2h 6m' }],
+    },
+    {
+        title: 'THE EARTH 3',
+        desc: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptate harum aperiam labore! Commodi officia ipsam libero possimus.',
+        img: 'https://www.film.ru/sites/default/files/images/49435960-1135677.jpg',
+        list: [{ year: '2021', age: '18', duration: '2h 6m' }],
+    },
+];
+
+export const MainSlider = () => {
+    return (
+        <Swiper
+            spaceBetween={0}
+            slidesPerView={1}
+            onSlideChange={() => console.log('slide change')}
+            onSwiper={(swiper) => console.log(swiper)}>
+            {filmsSlider.map((item, index) => (
+                <SwiperSlide key={`${item.title}_${index}`}>
+                    <Img src={item.img} />
+                    <Wrapper>
+                        <Film>
+                            <FilmTitle>{item.title}</FilmTitle>
+
+                            {item.list.map((listItem, index) => (
+                                <Digits key={`${listItem}_${index}`}>
+                                    <Year>{listItem.year}</Year>
+                                    <Age>{listItem.age}</Age>
+                                    <Duration>{listItem.duration}</Duration>
+                                </Digits>
+                            ))}
+                            <Desc>{item.desc}</Desc>
+                            <Buttons>
+                                <Button>Play now</Button>
+                                <Button>+ My list</Button>
+                            </Buttons>
+                        </Film>
+                    </Wrapper>
+                </SwiperSlide>
+            ))}
+        </Swiper>
+    );
+};
