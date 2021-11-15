@@ -16,7 +16,7 @@ export const Film = () => {
         })
             .then((res) => res.json())
             .then((json) => setFilm(json));
-    }, []);
+    }, [filmId]);
 
     return (
         <div>
