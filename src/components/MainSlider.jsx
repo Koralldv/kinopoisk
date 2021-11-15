@@ -148,7 +148,7 @@ const Arrow = styled.span`
     width: 40px;
     height: 40px;
     position: absolute;
-    top: 40%;
+    top: calc(50% - 40px);
     background-color: var(--rgba);
     box-shadow: var(--shadow);
     z-index: 99999;
