@@ -154,8 +154,8 @@ const Genre = styled.li`
 `;
 
 const Arrow = styled.span`
-    width: 40px;
-    height: 40px;
+    width: 56px;
+    height: 56px;
     position: absolute;
     top: 40%;
     background-color: var(--rgba);
