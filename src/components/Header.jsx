@@ -70,6 +70,11 @@ const Wrapper = styled.div`
     padding: 0 2rem;
     background-color: var(--colors-ui-base);
     box-shadow: var(--shadow);
+    z-index: 9999;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
 `;
 
 const Head = styled.header`
