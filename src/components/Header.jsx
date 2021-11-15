@@ -14,22 +14,34 @@ export const Header = () => {
 
     const setActive = ({ isActive }) => (isActive ? 'activeLink' : '');
 
+    const links = [
+        {
+            name: 'home',
+            link: '',
+        },
+        {
+            name: 'movies',
+            link: 'movies',
+        },
+        {
+            name: 'shows',
+            link: 'shows',
+        },
+        {
+            name: 'about',
+            link: 'about',
+        },
+    ];
+
     return (
         <Wrapper>
             <Head>
                 <Menu>
-                    <NavLink className={setActive} to="/">
-                        <MenuItem>HOME</MenuItem>
-                    </NavLink>
-                    <NavLink className={setActive} to="/movie">
-                        <MenuItem>MOVIES</MenuItem>
-                    </NavLink>
-                    <NavLink className={setActive} to="/shows">
-                        <MenuItem>SHOWS</MenuItem>
-                    </NavLink>
-                    <NavLink className={setActive} to="/about">
-                        <MenuItem>ABOUT</MenuItem>
-                    </NavLink>
+                    {links.map((link) => (
+                        <NavLink className={setActive} to={`${link.link}`}>
+                            <MenuItem>{`${link.name}`}</MenuItem>
+                        </NavLink>
+                    ))}
                 </Menu>
                 <SideMenu>
                     <MenuItem>
