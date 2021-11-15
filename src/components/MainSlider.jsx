@@ -55,7 +55,8 @@ export const MainSlider = () => {
 
 const Wrapper = styled.div`
     width: 100vw;
-    height: 100vh;
+    height: calc(100vh - 56px);
+    margin-top: 56px;
     padding: 0 2rem;
     display: flex;
     align-items: center;
@@ -72,7 +73,6 @@ const Rgba_bg = styled.div`
     background: var(--colors-bg);
     z-index: -1;
     width: 40%;
-    // filter: blur(20px);
 `;
 
 const Img = styled.img`
@@ -97,7 +97,6 @@ const FilmTitle = styled.h1`
 const Digits = styled.div`
     margin: 1rem 0;
     display: flex;
-    // justify-content: space-between;
     align-items: center;
 `;
 
@@ -145,10 +144,10 @@ const Button = styled.button`
 `;
 
 const Arrow = styled.span`
-    width: 40px;
-    height: 40px;
+    width: 56px;
+    height: 56px;
     position: absolute;
-    top: calc(50% - 40px);
+    top: calc(50% - 56px);
     background-color: var(--rgba);
     box-shadow: var(--shadow);
     z-index: 99999;
