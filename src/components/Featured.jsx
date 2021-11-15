@@ -1,10 +1,20 @@
 import styled from 'styled-components';
 import React, { useEffect, useState } from 'react';
-import { PREMIERE } from '../api/kinopios';
 import { Link } from 'react-router-dom';
 
+import { PREMIERE } from '../api/kinopios';
+import { IoArrowForwardOutline, IoArrowBack } from 'react-icons/io5';
+
+import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore, { Pagination, Navigation } from 'swiper/core';
+
+import 'swiper/swiper-bundle.min.css';
+import 'swiper/swiper.min.css';
+
+SwiperCore.use([Pagination, Navigation]);
+
 export const Featured = () => {
-    const [premieres, setPremieres] = useState(NaN);
+    const [premieres, setPremieres] = useState('');
 
     useEffect(() => {
         fetch(PREMIERE, {
@@ -15,31 +25,51 @@ export const Featured = () => {
             },
         })
             .then((res) => res.json())
-            .then((json) => setPremieres(json))
-            .catch((err) => console.log(err));
+            .then((json) => setPremieres(json));
     }, []);
 
     return (
         <Wrapper>
             <TitleBlock>Премьеры</TitleBlock>
-            {console.log(premieres.items, premieres)}
-            <CardWrapper>
-                {premieres &&
-                    premieres.items.map((item) => (
-                        <Card key={item.kinopoiskId}>
-                            <Cover src={item.posterUrlPreview} />
-                            <Link to={`/film/${item.kinopoiskId}`}>
-                                <Title>{item.nameRu}</Title>
-                            </Link>
-                            <List>
-                                <Year>{item.year}</Year>
-                                {item.genres.map((g) => (
-                                    <Genre>{g.genre}</Genre>
-                                ))}
-                            </List>
-                        </Card>
-                    ))}
-            </CardWrapper>
+            <Swiper
+                style={{ position: 'relative' }}
+                spaceBetween={0}
+                slidesPerGroup={6}
+                slidesPerView={6}
+                pagination={{
+                    el: '.swiper-paginations',
+                }}
+                navigation={{ nextEl: '.premieres__next', prevEl: '.premieres__prev' }}
+                onSwiper={(swiper) => console.log(swiper)}>
+                <Arrow left className="premieres__prev">
+                    <IoArrowBack size="22px" />
+                </Arrow>
+                <Arrow right className="premieres__next">
+                    <IoArrowForwardOutline size="22px" />
+                </Arrow>
+
+                <CardWrapper>
+                    {premieres &&
+                        premieres.items.map((item) => (
+                            <SwiperSlide key={item.kinopoiskId}>
+                                <Card>
+                                    <Cover src={item.posterUrlPreview} />
+                                    <Link title={item.nameRu} to={`/film/${item.kinopoiskId}`}>
+                                        <Title>{item.nameRu}</Title>
+                                    </Link>
+                                    <List>
+                                        <Year>{item.year}</Year>
+                                        {item.genres.map((g, index) => (
+                                            <Genre key={`${g.genge}_${index}`}>{g.genre}</Genre>
+                                        ))}
+                                    </List>
+                                </Card>
+                            </SwiperSlide>
+                        ))}
+                </CardWrapper>
+
+                <PaginationBlock className="swiper-paginations"></PaginationBlock>
+            </Swiper>
         </Wrapper>
     );
 };
@@ -65,6 +95,7 @@ const TitleBlock = styled.h3`
 
 const Card = styled.div`
     width: 100%;
+    height: 420px;
     max-width: 220px;
     margin: 1rem 0;
     border-radius: var(--radii);
@@ -81,9 +112,12 @@ const Cover = styled.img`
 const Title = styled.h3`
     color: var(--colors-text);
     font-weight: var(--fw-bold);
-    font-size: var(--fz-sm);
+    font-size: 13px;
     margin: 1.3rem 0.5rem 1rem 0.5rem;
     text-transform: uppercase;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 `;
 const List = styled.ul`
     list-style: none;
@@ -108,6 +142,7 @@ const Year = styled.li`
 //     color: var(--colors-text);
 //     opacity: 0.6;
 // `;
+
 const Genre = styled.li`
     margin: 0 1rem 0 0;
     padding: 0;
@@ -116,4 +151,26 @@ const Genre = styled.li`
     color: var(--colors-text);
     opacity: 0.6;
     text-transform: capitalize;
+`;
+
+const Arrow = styled.span`
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 40%;
+    background-color: var(--rgba);
+    box-shadow: var(--shadow);
+    z-index: 99999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    cursor: pointer;
+
+    left: ${(props) => (props.left ? '5px' : 'auto')};
+    right: ${(props) => (props.right ? '5px' : 'auto')};
+`;
+
+const PaginationBlock = styled.div`
+    text-align: center;
 `;
