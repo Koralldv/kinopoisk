@@ -79,10 +79,10 @@ const Wrapper = styled.div`
 
 const Head = styled.header`
     width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 50px;
     @media (min-width: 767px) {
         justify-content: space-between;
         flex-direction: row;
@@ -98,9 +98,12 @@ const Menu = styled.ul`
 `;
 
 const MenuItem = styled.li`
-    padding: 1rem;
+    padding: 0 1rem;
+    height: 56px;
     color: var(--colors-text);
     cursor: pointer;
+    display: flex;
+    align-items: center;
     transition: background 0.2s;
     font-weight: var(--fw-normal);
 
