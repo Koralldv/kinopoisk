@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { PREMIERE } from '../api/kinopios';
+import { PREMIERE } from '../api/kinopoisk';
 import { IoArrowForwardOutline, IoArrowBack } from 'react-icons/io5';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -60,7 +60,7 @@ export const Featured = () => {
                                     <List>
                                         <Year>{item.year}</Year>
                                         {item.genres.map((g, index) => (
-                                            <Genre key={`${g.genge}_${index}`}>{g.genre}</Genre>
+                                            <Genre key={`${g.genre}_${index}`}>{g.genre}</Genre>
                                         ))}
                                     </List>
                                 </Card>
@@ -118,6 +118,11 @@ const Title = styled.h3`
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+    transition: color 0.2s linear;
+
+    &:hover {
+        color: red;
+    }
 `;
 const List = styled.ul`
     list-style: none;
