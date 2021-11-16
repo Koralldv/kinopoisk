@@ -38,7 +38,7 @@ export const Header = () => {
             <Head>
                 <Menu>
                     {links.map((link) => (
-                        <NavLink className={setActive} to={`${link.link}`}>
+                        <NavLink key={`${link.name}`} className={setActive} to={`${link.link}`}>
                             <MenuItem>{`${link.name}`}</MenuItem>
                         </NavLink>
                     ))}
