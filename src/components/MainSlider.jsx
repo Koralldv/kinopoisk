@@ -9,6 +9,8 @@ import SwiperCore, { Navigation } from 'swiper/core';
 import 'swiper/swiper-bundle.min.css';
 import 'swiper/swiper.min.css';
 
+import { Button } from './Button';
+
 SwiperCore.use([Navigation]);
 
 export const MainSlider = () => {
@@ -125,23 +127,12 @@ const Duration = styled.span`
 `;
 
 const Desc = styled.p`
-    margin: 0 0 2rem 0;
+    margin: 0 0 1rem 0;
     color: var(--colors-text);
     font-weight: var(--fw-normal);
 `;
 
 const Buttons = styled.div``;
-
-const Button = styled.button`
-    background-color: var(--colors-ui-base);
-    border: none;
-    border-radius: var(--radii);
-    box-shadow: var(--shadow);
-    padding: 1rem 2rem;
-    cursor: pointer;
-    margin-right: 1rem;
-    color: var(--color-text);
-`;
 
 const Arrow = styled.span`
     width: 56px;
