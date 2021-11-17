@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { PREMIERE } from '../api/kinopoisk';
 import { IoArrowForwardOutline, IoArrowBack } from 'react-icons/io5';
 
+import { Arrow } from './Arrow';
+
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Pagination, Navigation } from 'swiper/core';
 
@@ -156,24 +158,6 @@ const Genre = styled.li`
     color: var(--colors-text);
     opacity: 0.6;
     text-transform: capitalize;
-`;
-
-const Arrow = styled.span`
-    width: 56px;
-    height: 56px;
-    position: absolute;
-    top: 40%;
-    background-color: var(--rgba);
-    box-shadow: var(--shadow);
-    z-index: 99999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50px;
-    cursor: pointer;
-
-    left: ${(props) => (props.left ? '5px' : 'auto')};
-    right: ${(props) => (props.right ? '5px' : 'auto')};
 `;
 
 const PaginationBlock = styled.div`

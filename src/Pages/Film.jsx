@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { SINGLE_FILM, FRAMES } from '../api/kinopoisk';
 
+import { Arrow } from '../components/Arrow';
 import { Button } from '../components/Button';
 
 import {
@@ -260,24 +261,6 @@ const ImgSlide = styled.img`
     max-width: 300px;
     width: 100%;
     height: 220px;
-`;
-
-const Arrow = styled.span`
-    width: 56px;
-    height: 56px;
-    position: absolute;
-    top: 40%;
-    background-color: var(--rgba);
-    box-shadow: var(--shadow);
-    z-index: 99999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50px;
-    cursor: pointer;
-
-    left: ${(props) => (props.left ? '5px' : 'auto')};
-    right: ${(props) => (props.right ? '5px' : 'auto')};
 `;
 
 const PaginationBlock = styled.div`

@@ -3,6 +3,8 @@ import React from 'react';
 
 import { IoArrowForwardOutline, IoArrowBack } from 'react-icons/io5';
 
+import { Arrow } from './Arrow';
+
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation } from 'swiper/core';
 
@@ -32,7 +34,7 @@ export const MainSlider = () => {
                             {item.list.map((listItem, index) => (
                                 <Digits key={`${listItem}_${index}`}>
                                     <Year>{listItem.year}</Year>
-                                    <Age>{listItem.age}</Age>
+                                    <Age>{listItem.age} +</Age>
                                     <Duration>{listItem.duration}</Duration>
                                 </Digits>
                             ))}
@@ -45,10 +47,10 @@ export const MainSlider = () => {
                     </Wrapper>
                 </SwiperSlide>
             ))}
-            <Arrow left className="main__prev">
+            <Arrow left main className="main__prev">
                 <IoArrowBack size="22px" />
             </Arrow>
-            <Arrow right className="main__next">
+            <Arrow right main className="main__next">
                 <IoArrowForwardOutline size="22px" />
             </Arrow>
         </Swiper>
@@ -133,24 +135,6 @@ const Desc = styled.p`
 `;
 
 const Buttons = styled.div``;
-
-const Arrow = styled.span`
-    width: 56px;
-    height: 56px;
-    position: absolute;
-    top: calc(50% - 56px);
-    background-color: var(--rgba);
-    box-shadow: var(--shadow);
-    z-index: 99999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50px;
-    cursor: pointer;
-
-    left: ${(props) => (props.left ? '5px' : 'auto')};
-    right: ${(props) => (props.right ? '5px' : 'auto')};
-`;
 
 const filmsSlider = [
     {
