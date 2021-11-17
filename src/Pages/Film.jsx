@@ -120,14 +120,14 @@ export const Film = () => {
                                         el: '.swiper-paginations',
                                     }}
                                     navigation={{
-                                        nextEl: '.premieres__next',
-                                        prevEl: '.premieres__prev',
+                                        nextEl: '.film__next',
+                                        prevEl: '.film__prev',
                                     }}
                                     onSwiper={(swiper) => console.log(swiper)}>
-                                    <Arrow left className="premieres__prev">
+                                    <Arrow left className="film__prev">
                                         <IoArrowBack size="22px" />
                                     </Arrow>
-                                    <Arrow right className="premieres__next">
+                                    <Arrow right className="film__next">
                                         <IoArrowForwardOutline size="22px" />
                                     </Arrow>
                                     {frames.frames.map((f) => (
