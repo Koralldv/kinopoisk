@@ -1,11 +1,9 @@
 import styled from 'styled-components';
 import React from 'react';
 
-import { IoArrowForwardOutline, IoArrowBack } from 'react-icons/io5';
+import { Slider } from './Slider';
 
-import { Arrow } from './Arrow';
-
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation } from 'swiper/core';
 
 import 'swiper/swiper-bundle.min.css';
@@ -17,12 +15,7 @@ SwiperCore.use([Navigation]);
 
 export const MainSlider = () => {
     return (
-        <Swiper
-            spaceBetween={0}
-            slidesPerView={1}
-            navigation={{ nextEl: '.main__next', prevEl: '.main__prev' }}
-            onSlideChange={() => console.log('slide change')}
-            onSwiper={(swiper) => console.log(swiper)}>
+        <Slider sliderName="main" spaceBetween={0} slidesPerGroup={1} slidesPerView={1}>
             {filmsSlider.map((item, index) => (
                 <SwiperSlide key={`${item.title}_${index}`}>
                     <Img src={item.img} />
@@ -47,13 +40,7 @@ export const MainSlider = () => {
                     </Wrapper>
                 </SwiperSlide>
             ))}
-            <Arrow left main className="main__prev">
-                <IoArrowBack size="22px" />
-            </Arrow>
-            <Arrow right main className="main__next">
-                <IoArrowForwardOutline size="22px" />
-            </Arrow>
-        </Swiper>
+        </Slider>
     );
 };
 

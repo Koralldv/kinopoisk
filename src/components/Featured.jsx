@@ -3,11 +3,10 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { PREMIERE } from '../api/kinopoisk';
-import { IoArrowForwardOutline, IoArrowBack } from 'react-icons/io5';
 
-import { Arrow } from './Arrow';
+import { Slider } from './Slider';
 
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { SwiperSlide } from 'swiper/react';
 import SwiperCore, { Pagination, Navigation } from 'swiper/core';
 
 import 'swiper/swiper-bundle.min.css';
@@ -33,23 +32,7 @@ export const Featured = () => {
     return (
         <Wrapper>
             <TitleBlock>Премьеры</TitleBlock>
-            <Swiper
-                style={{ position: 'relative' }}
-                spaceBetween={0}
-                slidesPerGroup={6}
-                slidesPerView={6}
-                pagination={{
-                    el: '.swiper-paginations',
-                }}
-                navigation={{ nextEl: '.premieres__next', prevEl: '.premieres__prev' }}
-                onSwiper={(swiper) => console.log(swiper)}>
-                <Arrow left className="premieres__prev">
-                    <IoArrowBack size="22px" />
-                </Arrow>
-                <Arrow right className="premieres__next">
-                    <IoArrowForwardOutline size="22px" />
-                </Arrow>
-
+            <Slider sliderName="premieres" spaceBetween={0} slidesPerGroup={6} slidesPerView={6}>
                 <CardWrapper>
                     {premieres &&
                         premieres.items.map((item) => (
@@ -71,7 +54,7 @@ export const Featured = () => {
                 </CardWrapper>
 
                 <PaginationBlock className="swiper-paginations"></PaginationBlock>
-            </Swiper>
+            </Slider>
         </Wrapper>
     );
 };

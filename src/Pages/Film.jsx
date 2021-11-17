@@ -4,8 +4,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { SINGLE_FILM, FRAMES } from '../api/kinopoisk';
 
-import { Arrow } from '../components/Arrow';
 import { Button } from '../components/Button';
+import { Slider } from '../components/Slider';
 
 import {
     IoPersonSharp,
@@ -13,12 +13,10 @@ import {
     IoHappyOutline,
     IoFootballOutline,
     IoPlanetOutline,
-    IoArrowForwardOutline,
-    IoArrowBack,
     IoStar,
 } from 'react-icons/io5';
 
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { SwiperSlide } from 'swiper/react';
 import SwiperCore, { Pagination, Navigation } from 'swiper/core';
 
 import 'swiper/swiper-bundle.min.css';
@@ -110,34 +108,20 @@ export const Film = () => {
                                 </Star>
                                 <Kinopoinsk>Рейтинг кинопоиска</Kinopoinsk>
                             </Rating>
-                            <BoxOffice>
-                                <Swiper
-                                    style={{ position: 'relative' }}
+                            <SliderWrap>
+                                <Slider
+                                    sliderName="film"
                                     spaceBetween={5}
                                     slidesPerGroup={3}
-                                    slidesPerView={3}
-                                    pagination={{
-                                        el: '.swiper-paginations',
-                                    }}
-                                    navigation={{
-                                        nextEl: '.film__next',
-                                        prevEl: '.film__prev',
-                                    }}
-                                    onSwiper={(swiper) => console.log(swiper)}>
-                                    <Arrow left className="film__prev">
-                                        <IoArrowBack size="22px" />
-                                    </Arrow>
-                                    <Arrow right className="film__next">
-                                        <IoArrowForwardOutline size="22px" />
-                                    </Arrow>
+                                    slidesPerView={3}>
                                     {frames.frames.map((f) => (
                                         <SwiperSlide key={`${f.preview}`}>
                                             <ImgSlide src={f.preview} />
                                         </SwiperSlide>
                                     ))}
                                     <PaginationBlock className="swiper-paginations"></PaginationBlock>
-                                </Swiper>
-                            </BoxOffice>
+                                </Slider>
+                            </SliderWrap>
                         </Persons>
                     </Info>
                 </About>
@@ -252,7 +236,7 @@ const Kinopoinsk = styled.span`
     word-wrap: break-word;
 `;
 
-const BoxOffice = styled.div`
+const SliderWrap = styled.div`
     max-width: 900px;
     width: 100%;
 `;

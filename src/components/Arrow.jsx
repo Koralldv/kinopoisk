@@ -13,7 +13,7 @@ export const Arrow = styled.span`
     border-radius: 50px;
     cursor: pointer;
 
-    top: ${(props) => (props.main ? 'calc(50% - 28px)' : '40%')};
+    top: ${(props) => (props.main === 'main' ? 'calc(50% - 28px)' : '40%')};
     left: ${(props) => (props.left ? '5px' : 'auto')};
     right: ${(props) => (props.right ? '5px' : 'auto')};
 `;
