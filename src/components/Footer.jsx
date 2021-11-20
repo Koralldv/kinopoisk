@@ -135,7 +135,7 @@ export const Footer = () => {
                 <List key={`${list.title}_${index}`}>
                     <ListTitle>{list.title}</ListTitle>
                     {list.list.map((link) => (
-                        <ListLink to={link.link}>
+                        <ListLink key={`${link.name}`} to={link.link}>
                             <ListItem>{link.name}</ListItem>
                         </ListLink>
                     ))}
@@ -146,7 +146,7 @@ export const Footer = () => {
 };
 
 const Wrap = styled.footer`
-    padding: 3rem 2rem 4rem 2rem;
+    padding: 3rem 3rem 4rem 3rem;
     display: flex;
     justify-content: space-between;
     background-color: var(--colors-ui-base);
