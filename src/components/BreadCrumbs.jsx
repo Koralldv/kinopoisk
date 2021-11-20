@@ -8,6 +8,10 @@ import { Button } from '../components/Button';
 export const BreadCrumbs = () => {
     const homeMatches = useMatch('/');
     const filmsMatches = useMatch('/films');
+    const aboutMatches = useMatch('/about');
+    const showsMatches = useMatch('/shows');
+    // const notFoundMatches = useMatch('**');
+    const contactsMatches = useMatch('/contacts');
     const filmMatches = useMatch('/films/:filmId');
 
     const { filmId } = useParams();
@@ -39,7 +43,11 @@ export const BreadCrumbs = () => {
                 <Breadcrumbs>
                     <Button onClick={() => navigate(-1)}>Назад</Button>
                     <LinkItem to="/">Home</LinkItem>
+                    {/* {notFoundMatches !== null ? <PageName>Not Found</PageName> : ''} */}
+                    {aboutMatches ? <PageName>About</PageName> : ''}
+                    {showsMatches ? <PageName>Shows</PageName> : ''}
                     {filmsMatches ? <PageName>Films</PageName> : ''}
+                    {contactsMatches ? <PageName>Contacts</PageName> : ''}
                     {filmMatches && (
                         <>
                             <LinkItem to="/films">Films</LinkItem>
