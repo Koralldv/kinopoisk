@@ -4,7 +4,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { SINGLE_FILM, FRAMES } from '../api/kinopoisk';
 
-import { Button } from '../components/Button';
 import { Slider } from '../components/Slider';
 
 import {
@@ -28,39 +27,44 @@ export const Film = () => {
     const { filmId } = useParams();
     const navigate = useNavigate();
     // console.log(useNavigate());
-    const [film, setFilm] = useState({});
+    const [film, setFilm] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
-    const [frames, setFrames] = useState({});
+    const [frames, setFrames] = useState(null);
 
     useEffect(async () => {
         setIsLoading(false);
 
-        await fetch(SINGLE_FILM(filmId), {
-            method: 'GET',
-            headers: {
-                'X-API-KEY': 'f876a4a1-43e5-45e4-bbab-4efbf24a5835',
-                'Content-Type': 'application/json',
-            },
-        })
-            .then((res) => res.json())
-            .then((json) => setFilm(json));
+        const fetchSingleFilm = async () => {
+            let response = await fetch(SINGLE_FILM(filmId), {
+                method: 'GET',
+                headers: {
+                    'X-API-KEY': 'f876a4a1-43e5-45e4-bbab-4efbf24a5835',
+                    'Content-Type': 'application/json',
+                },
+            });
+            response = await response.json();
+            setFilm(response);
+        };
 
-        await fetch(FRAMES(filmId), {
-            method: 'GET',
-            headers: {
-                'X-API-KEY': 'f876a4a1-43e5-45e4-bbab-4efbf24a5835',
-                'Content-Type': 'application/json',
-            },
-        })
-            .then((res) => res.json())
-            .then((json) => setFrames(json));
+        const fetchFramesFilm = async () => {
+            let responses = await fetch(FRAMES(filmId), {
+                method: 'GET',
+                headers: {
+                    'X-API-KEY': 'f876a4a1-43e5-45e4-bbab-4efbf24a5835',
+                    'Content-Type': 'application/json',
+                },
+            });
+            responses = await responses.json();
+            setFrames(responses);
+        };
 
+        await fetchSingleFilm();
+        await fetchFramesFilm();
         setIsLoading(true);
-    }, []);
+    }, [filmId]);
 
     return (
         <Wrapper>
-            <Button onClick={() => navigate(-1)}>Назад</Button>
             {isLoading ? (
                 <About>
                     <Img src={film.posterUrl} />
@@ -133,7 +137,7 @@ export const Film = () => {
 };
 
 const Wrapper = styled.div`
-    margin: 56px 2rem 2rem 2rem;
+    margin: 56px 3rem 2rem 3rem;
 `;
 
 const About = styled.div`
