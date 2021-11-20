@@ -20,7 +20,7 @@ export const MainSlider = () => {
                 <SwiperSlide key={`${item.title}_${index}`}>
                     <Img src={item.img} />
                     <Wrapper>
-                        <Rgba_bg />
+                        <RgbaBg />
                         <Film>
                             <FilmTitle>{item.title}</FilmTitle>
 
@@ -55,7 +55,7 @@ const Wrapper = styled.div`
     z-index: 2;
 `;
 
-const Rgba_bg = styled.div`
+const RgbaBg = styled.div`
     position: absolute;
     right: 0;
     left: 0;
