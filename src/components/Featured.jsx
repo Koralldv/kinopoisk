@@ -39,7 +39,7 @@ export const Featured = () => {
                             <SwiperSlide key={item.kinopoiskId}>
                                 <Card>
                                     <Cover src={item.posterUrlPreview} />
-                                    <Link title={item.nameRu} to={`/film/${item.kinopoiskId}`}>
+                                    <Link title={item.nameRu} to={`/films/${item.kinopoiskId}`}>
                                         <Title>{item.nameRu}</Title>
                                     </Link>
                                     <List>

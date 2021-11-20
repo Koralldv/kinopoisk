@@ -20,8 +20,8 @@ export const Header = () => {
             link: '',
         },
         {
-            name: 'movies',
-            link: 'movies',
+            name: 'films',
+            link: 'films',
         },
         {
             name: 'shows',

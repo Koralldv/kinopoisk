@@ -5,6 +5,7 @@ import {About} from './Pages/About'
 import {Contact} from './Pages/Contact'
 import {NotFound} from './Pages/NotFound'
 import {Layout} from './components/Layout'
+import {FilmsList} from './Pages/FilmsList'
 import {Film} from './Pages/Film'
 
 function App() {
@@ -16,9 +17,8 @@ function App() {
           <Route index element={<Home/>} />
           <Route path='about' element={<About/>} />
           <Route path='contact' element={<Contact/>} />
-          <Route path='film' element={<Film/>}>
-            <Route path=':filmId' element={<Film/>}/>
-          </Route>
+          <Route path='films' element={<FilmsList/>}/>
+          <Route path='films/:filmId' element={<Film/>}/>
           <Route path='*' element={<NotFound/>} />
         </Route>
       </Routes>
