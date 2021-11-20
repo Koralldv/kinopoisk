@@ -241,7 +241,7 @@ const Kinopoinsk = styled.span`
 `;
 
 const SliderWrap = styled.div`
-    max-width: 900px;
+    max-width: 850px;
     width: 100%;
 `;
 
