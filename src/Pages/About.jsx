@@ -1,5 +1,40 @@
 import React from 'react';
 
+import { Statistics } from '../components/Statistics';
+import {
+    IoVideocamOutline,
+    IoPeopleCircleOutline,
+    IoEyeOutline,
+    IoTrophyOutline,
+} from 'react-icons/io5';
+
+const stats = [
+    {
+        сomp: IoVideocamOutline,
+        amount: 12,
+        title: 'Movies',
+    },
+    {
+        сomp: IoEyeOutline,
+        amount: 55,
+        title: 'Shows',
+    },
+    {
+        сomp: IoPeopleCircleOutline,
+        amount: 359,
+        title: 'Members',
+    },
+    {
+        сomp: IoTrophyOutline,
+        amount: 246,
+        title: 'Awards',
+    },
+];
+
 export const About = () => {
-    return <div>about</div>;
+    return (
+        <>
+            <Statistics stats={stats} />
+        </>
+    );
 };
