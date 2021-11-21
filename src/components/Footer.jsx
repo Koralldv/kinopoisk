@@ -148,12 +148,18 @@ export const Footer = () => {
 const Wrap = styled.footer`
     padding: 3rem 3rem 4rem 3rem;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     background-color: var(--colors-ui-base);
     box-shadow: var(--shadow);
+
+    @media (max-width: 456px) {
+        flex-direction: column;
+        padding: 2rem;
+    }
 `;
 const About = styled.div`
-    width: 400px;
+    max-width: 400px;
 `;
 const Logo = styled.img``;
 const Slogan = styled.span`
@@ -175,6 +181,9 @@ const List = styled.ul`
     list-style: none;
     margin: 0;
     padding: 0;
+    @media (max-width: 456px) {
+        margin-bottom: 1rem;
+    }
 `;
 
 const ListTitle = styled.span`
