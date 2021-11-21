@@ -80,7 +80,7 @@ const Film = styled.div`
 `;
 
 const FilmTitle = styled.h1`
-    font-size: var(--fz-xl);
+    font-size: var(--fz-xxl);
     font-weight: var(--fw-bold);
     margin: 0;
 `;
