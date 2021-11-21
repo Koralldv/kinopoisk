@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { IoSearchSharp, IoMoon, IoMoonOutline, IoPerson } from 'react-icons/io5';
 import { NavLink } from 'react-router-dom';
 
-export const Header = () => {
+export const Header = ({ links }) => {
     const [theme, setTheme] = useState('light');
 
     const toggleTheme = () => setTheme(theme === 'light' ? 'dark' : 'light');
@@ -14,36 +14,13 @@ export const Header = () => {
 
     const setActive = ({ isActive }) => (isActive ? 'activeLink' : '');
 
-    const links = [
-        {
-            name: 'home',
-            link: '',
-        },
-        {
-            name: 'films',
-            link: 'films',
-        },
-        {
-            name: 'shows',
-            link: 'shows',
-        },
-        {
-            name: 'about',
-            link: 'about',
-        },
-        {
-            name: 'contacts',
-            link: 'contacts',
-        },
-    ];
-
     return (
         <Wrapper>
             <Head>
                 <Menu>
                     {links.map((link) => (
-                        <NavLink key={`${link.name}`} className={setActive} to={`${link.link}`}>
-                            <MenuItem>{`${link.name}`}</MenuItem>
+                        <NavLink key={`${link.title}`} className={setActive} to={`${link.path}`}>
+                            <MenuItem>{`${link.title}`}</MenuItem>
                         </NavLink>
                     ))}
                 </Menu>
