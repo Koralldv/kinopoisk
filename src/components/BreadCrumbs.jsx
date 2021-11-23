@@ -42,15 +42,15 @@ export const BreadCrumbs = () => {
             {!homeMatches && (
                 <Breadcrumbs>
                     <Button onClick={() => navigate(-1)}>Назад</Button>
-                    <LinkItem to="/">Home</LinkItem>
-                    {notFoundMatches !== null ? <PageName>Not Found</PageName> : ''}
-                    {aboutMatches ? <PageName>About</PageName> : ''}
-                    {showsMatches ? <PageName>Shows</PageName> : ''}
-                    {filmsMatches ? <PageName>Films</PageName> : ''}
-                    {contactsMatches ? <PageName>Contacts</PageName> : ''}
+                    <LinkItem to="/">Главная</LinkItem>
+                    {notFoundMatches !== null ? <PageName>Не найдено</PageName> : ''}
+                    {aboutMatches ? <PageName>О нас</PageName> : ''}
+                    {showsMatches ? <PageName>Шоу</PageName> : ''}
+                    {filmsMatches ? <PageName>Фильмы</PageName> : ''}
+                    {contactsMatches ? <PageName>Конткты</PageName> : ''}
                     {filmMatches && (
                         <>
-                            <LinkItem to="/films">Films</LinkItem>
+                            <LinkItem to="/films">Фильмы</LinkItem>
                             <PageName>
                                 {isLoading === true ? film.nameRu || film.nameOriginal : ''}
                             </PageName>
