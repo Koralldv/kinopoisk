@@ -4,7 +4,7 @@ import React from 'react';
 export const Statistics = ({ stats }) => {
     return (
         <Wrapper>
-            <Title>OUR STATISTICS</Title>
+            <Title>our statistics</Title>
             <StatList>
                 {stats.map((stat) => (
                     <StatItem>
@@ -34,6 +34,7 @@ const Title = styled.h2`
     font-weight: var(--fw-bold);
     padding: 0;
     margin: 0 0 2rem 0;
+    text-transform: uppercase;
 `;
 const StatList = styled.ul`
     list-style: none;
