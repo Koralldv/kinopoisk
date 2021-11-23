@@ -8,7 +8,9 @@ export const Statistics = ({ stats }) => {
             <StatList>
                 {stats.map((stat) => (
                     <StatItem>
-                        <Icon>{React.createElement(stat.сomp, { size: '55px' })}</Icon>
+                        <Icon>
+                            {React.createElement(stat.сomp, { size: '55px', color: 'red' })}
+                        </Icon>
                         <Amount>{stat.amount}</Amount>
                         <ItemTitle>{stat.title}</ItemTitle>
                     </StatItem>
