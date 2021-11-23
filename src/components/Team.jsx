@@ -5,30 +5,30 @@ const team = [
     {
         img: 'https://excellencetheme.com/templates/avastream/images/about/01.jpg',
         name: 'Tonny Smith',
-        position: 'ceo',
+        position: 'сео',
     },
     {
         img: 'https://excellencetheme.com/templates/avastream/images/about/02.jpg',
         name: 'Barry Tech',
-        position: 'designer',
+        position: 'дизайнер',
     },
 
     {
         img: 'https://excellencetheme.com/templates/avastream/images/about/03.jpg',
         name: 'Kep John',
-        position: 'developer',
+        position: 'разработчик',
     },
     {
         img: 'https://excellencetheme.com/templates/avastream/images/about/04.jpg',
         name: 'Monty Rock',
-        position: 'designer',
+        position: 'дизайнер',
     },
 ];
 
 export const Team = () => {
     return (
         <Wrapper>
-            <Title>our team</Title>
+            <Title>наша команда</Title>
             <Teams>
                 {team.map((t) => (
                     <TeamsItem key={t.name}>
