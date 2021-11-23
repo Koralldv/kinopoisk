@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Statistics } from '../components/Statistics';
+import { Join } from '../components/Join';
 import {
     IoVideocamOutline,
     IoPeopleCircleOutline,
@@ -35,6 +36,7 @@ export const About = () => {
     return (
         <>
             <Statistics stats={stats} />
+            <Join />
         </>
     );
 };
