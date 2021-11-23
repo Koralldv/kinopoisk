@@ -112,14 +112,9 @@ const TitleBlock = styled.h3`
 const Card = styled.div`
     width: 100%;
     height: 420px;
-    // max-width: 220px;
     margin: 1rem 0;
     border-radius: var(--radii);
     box-shadow: var(--shadow);
-    // @media (max-width: 426px) {
-    //     max-width: calc(45%);
-    //     margin-bottom: 2rem;
-    // }
 `;
 const Cover = styled.img`
     width: 100%;
