@@ -5,7 +5,7 @@ import { Slider } from './Slider';
 
 import { SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation } from 'swiper/core';
-
+import { IoArrowForwardOutline, IoHeart } from 'react-icons/io5';
 import 'swiper/swiper-bundle.min.css';
 import 'swiper/swiper.min.css';
 
@@ -33,8 +33,12 @@ export const MainSlider = () => {
                             ))}
                             <Desc>{item.desc}</Desc>
                             <Buttons>
-                                <Button>Play now</Button>
-                                <Button>+ My list</Button>
+                                <Button icon={IoArrowForwardOutline} margin="left">
+                                    Смотреть
+                                </Button>
+                                <Button icon={IoHeart} margin="right">
+                                    В избранное
+                                </Button>
                             </Buttons>
                         </Film>
                     </Wrapper>
@@ -121,7 +125,10 @@ const Desc = styled.p`
     font-weight: var(--fw-normal);
 `;
 
-const Buttons = styled.div``;
+const Buttons = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+`;
 
 const filmsSlider = [
     {

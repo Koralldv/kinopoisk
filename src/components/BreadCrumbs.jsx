@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import { useParams, useMatch, Link, useNavigate } from 'react-router-dom';
 import { SINGLE_FILM } from '../api/kinopoisk';
 import { Button } from '../components/Button';
+import { IoLogoFacebook } from 'react-icons/io5';
+import { Fragment } from 'react';
 
 export const BreadCrumbs = () => {
     const homeMatches = useMatch('/');
@@ -79,7 +81,6 @@ const PageName = styled.span`
 
 const Breadcrumbs = styled.div`
     margin: 5rem 0 0 3rem;
-    & :first-child {
-        margin-right: 2rem;
-    }
+    display: flex;
+    align-items: center;
 `;
