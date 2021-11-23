@@ -6,19 +6,19 @@ import { Outlet } from 'react-router-dom';
 
 const links = [
     {
-        title: 'home',
+        title: 'Главная',
         path: '',
     },
     {
-        title: 'films',
+        title: 'Фильмы',
         path: 'films',
     },
     {
-        title: 'about',
+        title: 'О нас',
         path: 'about',
     },
     {
-        title: 'contacts',
+        title: 'Контакты',
         path: 'contacts',
     },
 ];
