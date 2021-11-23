@@ -25,15 +25,16 @@ export const Join = () => {
 };
 
 const Wrapper = styled.div`
-    margin: 3rem auto;
-    width: 80%;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+    width: 100%;
     display: flex;
     align-items: center;
+    background-image: linear-gradient(to right, rgb(12, 21, 26), rgba(0, 0, 0, 0.69)),
+        url('https://excellencetheme.com/templates/avastream/images/parallax/about.jpg');
+    background-attachment: fixed;
     @media (max-width: 768px) {
         flex-direction: column;
-    }
-    @media (max-width: 425px) {
-        margin: 2rem 2rem;
     }
 `;
 const Img = styled.img`
@@ -47,14 +48,14 @@ const Img = styled.img`
 const Info = styled.div``;
 const Title = styled.h2`
     font-size: var(--fz-xl);
-    color: var(--colors-text);
+    color: #fff;
     margin: 0 0 1rem 0;
     padding: 0;
     word-wrap: break-word;
 `;
 const Description = styled.p`
     font-size: var(--fz-md);
-    color: var(--colors-text);
+    color: #fff;
     margin: 0;
     padding: 0;
     word-wrap: break-word;
