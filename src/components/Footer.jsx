@@ -8,19 +8,19 @@ const links = [
         title: 'Display type',
         list: [
             {
-                name: 'home',
+                name: 'Главная',
                 link: '/',
             },
             {
-                name: 'movies',
+                name: 'Фильмы',
                 link: '/movies',
             },
             {
-                name: 'shows',
+                name: 'Шоу',
                 link: '/shows',
             },
             {
-                name: 'about',
+                name: 'О нас',
                 link: '/about',
             },
         ],
@@ -119,13 +119,10 @@ export const Footer = () => {
             <About>
                 {/* <Logo></Logo> */}
                 <div>Logo</div>
-                <Slogan>
-                    Here , write the complete address of the Registered office address along with
-                    telephone number.
-                </Slogan>
+                <Slogan>Кино только начинается…</Slogan>
                 <Social>
                     {social.map((s) => (
-                        <SocialLink key={`${s.name}`} href={`${s.link}`}>
+                        <SocialLink key={`${s.name}`} title={s.name} href={`${s.link}`}>
                             <SocialItem>{React.createElement(s.сomp, { size: '24px' })}</SocialItem>
                         </SocialLink>
                     ))}
@@ -190,11 +187,14 @@ const ListTitle = styled.span`
     font-size: var(--fz-md);
     font-weight: var(--fw-bold);
     color: var(--colors-text);
+    display: block;
+    margin-bottom: 0.5rem;
 `;
 
 const ListItem = styled.li`
     font-size: var(--fz-md);
     font-weight: var(--fw-normal);
+    margin-bottom: 0.2rem;
 `;
 
 const SocialLink = styled.a`
