@@ -4,7 +4,7 @@ import React from 'react';
 export const Statistics = ({ stats }) => {
     return (
         <Wrapper>
-            <Title>our statistics</Title>
+            <Title>наша статистика</Title>
             <StatList>
                 {stats.map((stat) => (
                     <StatItem>
