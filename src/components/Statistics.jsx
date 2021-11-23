@@ -21,6 +21,9 @@ export const Statistics = ({ stats }) => {
 const Wrapper = styled.div`
     padding: 3rem;
     background-color: var(--colors-bg);
+    @media (max-width: 425px) {
+        padding: 3rem 2rem;
+    }
 `;
 
 const Title = styled.h2`
@@ -37,6 +40,10 @@ const StatList = styled.ul`
     display: flex;
     justify-content: space-between;
     width: 50%;
+    @media (max-width: 768px) {
+        width: 100%;
+        margin: 0 0 2rem 0;
+    }
 `;
 const StatItem = styled.li`
     display: flex;
