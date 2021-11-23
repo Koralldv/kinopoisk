@@ -3,10 +3,16 @@ import { Swiper } from 'swiper/react';
 import { Arrow } from '../components/Arrow';
 import { IoArrowForwardOutline, IoArrowBack } from 'react-icons/io5';
 
-export const Slider = ({ children, sliderName, spaceBetween, slidesPerGroup, slidesPerView }) => {
+export const Slider = ({
+    children,
+    sliderName,
+    spaceBetween,
+    slidesPerGroup,
+    slidesPerView,
+    breaks,
+}) => {
     return (
         <Swiper
-            style={{ position: 'relative' }}
             spaceBetween={spaceBetween}
             slidesPerGroup={slidesPerGroup}
             slidesPerView={slidesPerView}
@@ -17,6 +23,7 @@ export const Slider = ({ children, sliderName, spaceBetween, slidesPerGroup, sli
                 nextEl: `.${sliderName}__next`,
                 prevEl: `.${sliderName}__prev`,
             }}
+            breakpoints={breaks}
             onSwiper={(swiper) => console.log(swiper)}>
             <Arrow left className={`${sliderName}__prev`} main={sliderName}>
                 <IoArrowBack size="22px" />

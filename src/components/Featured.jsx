@@ -32,7 +32,38 @@ export const Featured = () => {
     return (
         <Wrapper>
             <TitleBlock>Премьеры</TitleBlock>
-            <Slider sliderName="premieres" spaceBetween={0} slidesPerGroup={6} slidesPerView={6}>
+            <Slider
+                sliderName="premieres"
+                spaceBetween={0}
+                slidesPerGroup={1}
+                slidesPerView={1}
+                breaks={{
+                    550: {
+                        spaceBetween: 20,
+                        slidesPerView: 2,
+                        slidesPerGroup: 2,
+                    },
+                    768: {
+                        spaceBetween: 20,
+                        slidesPerView: 3,
+                        slidesPerGroup: 3,
+                    },
+                    1024: {
+                        spaceBetween: 20,
+                        slidesPerView: 4,
+                        slidesPerGroup: 4,
+                    },
+                    1180: {
+                        spaceBetween: 20,
+                        slidesPerView: 5,
+                        slidesPerGroup: 5,
+                    },
+                    1366: {
+                        spaceBetween: 20,
+                        slidesPerView: 6,
+                        slidesPerGroup: 6,
+                    },
+                }}>
                 <CardWrapper>
                     {premieres &&
                         premieres.items.map((item) => (
@@ -81,18 +112,19 @@ const TitleBlock = styled.h3`
 const Card = styled.div`
     width: 100%;
     height: 420px;
-    max-width: 220px;
+    // max-width: 220px;
     margin: 1rem 0;
     border-radius: var(--radii);
     box-shadow: var(--shadow);
-    @media (max-width: 426px) {
-        max-width: calc(45%);
-        margin-bottom: 2rem;
-    }
+    // @media (max-width: 426px) {
+    //     max-width: calc(45%);
+    //     margin-bottom: 2rem;
+    // }
 `;
 const Cover = styled.img`
     width: 100%;
     height: 300px;
+    object-fit: cover;
 `;
 const Title = styled.h3`
     color: var(--colors-text);

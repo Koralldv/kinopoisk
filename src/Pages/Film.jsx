@@ -115,9 +115,26 @@ export const Film = () => {
                             <SliderWrap>
                                 <Slider
                                     sliderName="film"
-                                    spaceBetween={5}
-                                    slidesPerGroup={3}
-                                    slidesPerView={3}>
+                                    spaceBetween={0}
+                                    slidesPerGroup={1}
+                                    slidesPerView={1}
+                                    breaks={{
+                                        550: {
+                                            spaceBetween: 20,
+                                            slidesPerView: 2,
+                                            slidesPerGroup: 2,
+                                        },
+                                        768: {
+                                            spaceBetween: 20,
+                                            slidesPerView: 2,
+                                            slidesPerGroup: 2,
+                                        },
+                                        1024: {
+                                            spaceBetween: 20,
+                                            slidesPerView: 3,
+                                            slidesPerGroup: 3,
+                                        },
+                                    }}>
                                     {frames.frames.map((f) => (
                                         <SwiperSlide key={`${f.preview}`}>
                                             <ImgSlide src={f.preview} />
@@ -138,6 +155,9 @@ export const Film = () => {
 
 const Wrapper = styled.div`
     margin: 56px 3rem 2rem 3rem;
+    @media (max-width: 425px) {
+        margin: 56px 1.5rem 2rem 1.5rem;
+    }
 `;
 
 const About = styled.div`
@@ -174,6 +194,9 @@ const Title = styled.h1`
     padding: 0;
     text-transform: uppercase;
     word-wrap: break-word;
+    @media (max-width: 768px) {
+        margin: 2rem 0;
+    }
 `;
 
 const List = styled.ul`
@@ -241,12 +264,12 @@ const Kinopoinsk = styled.span`
 `;
 
 const SliderWrap = styled.div`
-    max-width: 850px;
+    max-width: 800px;
     width: 100%;
 `;
 
 const ImgSlide = styled.img`
-    max-width: 300px;
+    // max-width: 300px;
     width: 100%;
     height: 220px;
 `;
