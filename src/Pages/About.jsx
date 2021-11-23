@@ -13,23 +13,23 @@ import {
 const stats = [
     {
         сomp: IoVideocamOutline,
-        amount: 12,
-        title: 'Movies',
+        amount: 14323,
+        title: 'Фильмов',
     },
     {
         сomp: IoEyeOutline,
-        amount: 55,
-        title: 'Shows',
+        amount: 120,
+        title: 'Передач',
     },
     {
         сomp: IoPeopleCircleOutline,
-        amount: 359,
-        title: 'Members',
+        amount: 64415,
+        title: 'Пользователей',
     },
     {
         сomp: IoTrophyOutline,
-        amount: 246,
-        title: 'Awards',
+        amount: 41,
+        title: 'Наград',
     },
 ];
 
