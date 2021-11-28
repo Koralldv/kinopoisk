@@ -4,8 +4,6 @@ import styled from 'styled-components';
 import { useParams, useMatch, Link, useNavigate } from 'react-router-dom';
 import { SINGLE_FILM } from '../api/kinopoisk';
 import { Button } from '../components/Button';
-import { IoLogoFacebook } from 'react-icons/io5';
-import { Fragment } from 'react';
 
 export const BreadCrumbs = () => {
     const homeMatches = useMatch('/');
@@ -22,7 +20,7 @@ export const BreadCrumbs = () => {
     const [film, setFilm] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
-    useEffect(async () => {
+    useEffect(() => {
         setIsLoading(false);
 
         const fetchSingleFilm = async () => {
