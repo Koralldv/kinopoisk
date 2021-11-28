@@ -2,9 +2,9 @@ import styled from 'styled-components';
 
 import React from 'react';
 
-export const Button = ({ icon, children, margin, onClick }) => {
+export const Button = ({ icon, children, margin, onClick, isActive, isDelete }) => {
     return (
-        <Btn margin={margin} onClick={onClick}>
+        <Btn margin={margin} isDelete={isDelete} isActive={isActive} onClick={onClick}>
             {icon && (
                 <Icon margin={margin} icon>
                     {React.createElement(icon, { size: '18px' })}
@@ -29,6 +29,10 @@ const Btn = styled.button`
     justify-content: center;
     align-items: center;
     flex-direction: ${(props) => (props.margin && props.margin === 'left' ? 'row-reverse' : 'row')};
+    background-color: ${(props) =>
+        props.isActive === 'active' || props.isActive === 'active' ? 'red' : ''};
+    background-color: ${(props) => (props.isDelete ? 'red' : '')};
+    color: ${(props) => (props.isDelete ? '#fff' : '')};
 `;
 
 const Icon = styled.i`
