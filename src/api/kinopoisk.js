@@ -13,3 +13,5 @@ export let PREMIERE = BASE_URL_22 + `/premieres?year=${yearNow}&month=${monthNow
 export const SINGLE_FILM = (id) => BASE_URL_22 + '/' + id
 
 export const FRAMES = (id) => BASE_URL_21 + `/${id}/frames`
+
+export const SEARCH_BY_KEYWORD  = (word, page) => BASE_URL_21 + `/search-by-keyword?keyword=${word}&page=${page}`;
