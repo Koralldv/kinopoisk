@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import { SINGLE_FILM, FRAMES } from '../api/kinopoisk';
 
@@ -25,7 +25,7 @@ SwiperCore.use([Pagination, Navigation]);
 
 export const Film = () => {
     const { filmId } = useParams();
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     // console.log(useNavigate());
     const [film, setFilm] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
