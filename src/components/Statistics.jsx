@@ -7,7 +7,7 @@ export const Statistics = ({ stats }) => {
             <Title>наша статистика</Title>
             <StatList>
                 {stats.map((stat) => (
-                    <StatItem>
+                    <StatItem key={stat.title}>
                         <Icon>
                             {React.createElement(stat.сomp, { size: '55px', color: 'red' })}
                         </Icon>
