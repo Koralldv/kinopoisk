@@ -25,9 +25,11 @@ export const Header = ({ links }) => {
                     ))}
                 </Menu>
                 <SideMenu>
-                    <MenuItem>
-                        <IoSearchSharp size="20px" />
-                    </MenuItem>
+                    <NavLink to="/search" className={setActive}>
+                        <MenuItem>
+                            <IoSearchSharp size="20px" />
+                        </MenuItem>
+                    </NavLink>
                     <MenuItem>
                         <IoPerson size="20px" />
                     </MenuItem>
