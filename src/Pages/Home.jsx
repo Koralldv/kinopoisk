@@ -1,12 +1,12 @@
 import React from 'react';
 import { MainSlider } from '../components/MainSlider';
-import { Featured } from '../components/Featured';
+import { Premiere } from '../components/Premiere';
 
 export const Home = () => {
     return (
         <>
             <MainSlider />
-            <Featured />
+            <Premiere />
         </>
     );
 };
