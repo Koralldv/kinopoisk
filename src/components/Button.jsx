@@ -2,9 +2,14 @@ import styled from 'styled-components';
 
 import React from 'react';
 
-export const Button = ({ icon, children, margin, onClick, isActive, isDelete }) => {
+export const Button = ({ icon, children, margin, onClick, isActive, isDelete, disabled }) => {
     return (
-        <Btn margin={margin} isDelete={isDelete} isActive={isActive} onClick={onClick}>
+        <Btn
+            margin={margin}
+            isDelete={isDelete}
+            isActive={isActive}
+            onClick={onClick}
+            disabled={disabled}>
             {icon && (
                 <Icon margin={margin} icon>
                     {React.createElement(icon, { size: '18px' })}
