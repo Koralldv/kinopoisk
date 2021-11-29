@@ -4,27 +4,26 @@ import { Link } from 'react-router-dom';
 export const FilmCardsList = ({ films }) => {
     return (
         <>
-            {films
-                ? films.map((f) => (
-                      <div key={f.filmId}>
-                          <Card>
-                              <Cover src={f.posterUrlPreview} />
-                              <Link title={f.nameRu} to={`/films/${f.filmId}`}>
-                                  <CardTitle>{f.nameRu}</CardTitle>
-                              </Link>
-                              <List>
-                                  <Year>год: {f.year}</Year>
-                                  <GenreWrapper>
-                                      {f.genres.map((g, index) => (
-                                          <Genre key={`${g.genre}_${index}`}>{g.genre}</Genre>
-                                      ))}
-                                  </GenreWrapper>
-                              </List>
-                          </Card>
-                          <br></br>
-                      </div>
-                  ))
-                : ''}
+            {films &&
+                films.map((f) => (
+                    <div key={f.filmId}>
+                        <Card>
+                            <Cover src={f.posterUrlPreview} />
+                            <Link title={f.nameRu} to={`/films/${f.filmId}`}>
+                                <CardTitle>{f.nameRu}</CardTitle>
+                            </Link>
+                            <List>
+                                <Year>год: {f.year}</Year>
+                                <GenreWrapper>
+                                    {f.genres.map((g, index) => (
+                                        <Genre key={`${g.genre}_${index}`}>{g.genre}</Genre>
+                                    ))}
+                                </GenreWrapper>
+                            </List>
+                        </Card>
+                        <br></br>
+                    </div>
+                ))}
         </>
     );
 };
