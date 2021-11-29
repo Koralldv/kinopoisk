@@ -5,7 +5,8 @@ import {About} from './Pages/About'
 import {Contact} from './Pages/Contact'
 import {NotFound} from './Pages/NotFound'
 import {Layout} from './components/Layout'
-import {FilmsList} from './Pages/FilmsList'
+import {Search} from './Pages/Search'
+import {Films} from './Pages/Films'
 import {Film} from './Pages/Film'
 
 function App() {
@@ -17,10 +18,10 @@ function App() {
           <Route index element={<Home/>} />
           <Route path='about' element={<About/>} />
           <Route path='contacts' element={<Contact/>} />
-          {/* <Route path='films' element={<FilmsList/>}/> */}
+          <Route path='films' element={<Films/>}/>
           <Route path='films/:filmId' element={<Film/>}/>
-          <Route path='search' element={<FilmsList/>}/>
-          <Route path='search/:id' element={<FilmsList/>}/>
+          <Route path='search' element={<Search/>}/>
+          <Route path='search/:id' element={<Search/>}/>
           <Route path='*' element={<NotFound/>} />
         </Route>
       </Routes>
