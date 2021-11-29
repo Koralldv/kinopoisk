@@ -12,6 +12,7 @@ export const BreadCrumbs = () => {
     const showsMatches = useMatch('/shows');
     const notFoundMatches = useMatch('*/*');
     const contactsMatches = useMatch('/contacts');
+    const searchMatches = useMatch('/search');
     const filmMatches = useMatch('/films/:filmId');
 
     const { filmId } = useParams();
@@ -48,6 +49,7 @@ export const BreadCrumbs = () => {
                     {showsMatches ? <PageName>Шоу</PageName> : ''}
                     {filmsMatches ? <PageName>Фильмы</PageName> : ''}
                     {contactsMatches ? <PageName>Конткты</PageName> : ''}
+                    {searchMatches ? <PageName>Поиск фильмов</PageName> : ''}
                     {filmMatches && (
                         <>
                             <LinkItem to="/films">Фильмы</LinkItem>
