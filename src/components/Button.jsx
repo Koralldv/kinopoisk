@@ -2,11 +2,21 @@ import styled from 'styled-components';
 
 import React from 'react';
 
-export const Button = ({ icon, children, margin, onClick, isActive, isDelete, disabled }) => {
+export const Button = ({
+    icon,
+    children,
+    margin,
+    onClick,
+    isActive,
+    isDelete,
+    disabled,
+    isSucces,
+}) => {
     return (
         <Btn
             margin={margin}
             isDelete={isDelete}
+            isSucces={isSucces}
             isActive={isActive}
             onClick={onClick}
             disabled={disabled}>
@@ -37,7 +47,9 @@ const Btn = styled.button`
     background-color: ${(props) =>
         props.isActive === 'active' || props.isActive === 'active' ? 'red' : ''};
     background-color: ${(props) => (props.isDelete ? 'red' : '')};
-    color: ${(props) => (props.isDelete ? '#fff' : '')};
+    background-color: ${(props) => (props.isSucces ? '#0cca4a' : '')};
+
+    color: ${(props) => (props.isDelete || props.isSucces ? '#fff' : '')};
 `;
 
 const Icon = styled.i`
