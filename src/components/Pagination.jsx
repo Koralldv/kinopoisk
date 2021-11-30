@@ -1,32 +1,37 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-
 import { Button } from '../components/Button';
 
-export const Pagination = ({ pagesArray, activePage, setActivePage }) => {
+export const Pagination = ({
+    pagesArray,
+    activePage,
+    setActivePage,
+    setSearchParams,
+    searchQuery,
+}) => {
+    const handlePag = (index) => {
+        setSearchParams({ keyword: searchQuery, page: index + 1 });
+        setActivePage(index + 1);
+    };
+
     return (
         <Paginations>
             {pagesArray &&
                 pagesArray.map((p, index) => (
-                    <LinkItem to={`/search/${index + 1}`} key={p}>
-                        <Button
-                            isActive={activePage === index + 1 ? 'active' : ''}
-                            onClick={() => setActivePage(index + 1)}>
-                            {p}
-                        </Button>
-                    </LinkItem>
+                    <Button
+                        key={p}
+                        isActive={activePage == index + 1 ? 'active' : ''}
+                        isDelete={activePage == index + 1 ? true : false}
+                        onClick={() => handlePag(index)}>
+                        {p}
+                    </Button>
                 ))}
         </Paginations>
     );
 };
 
 const Paginations = styled.div`
-    margin: 2rem auto;
+    margin: 2rem 0;
     display: flex;
-`;
-
-const LinkItem = styled(Link)`
-    text-decoration: none;
-    color: var(--colors-text);
+    justify-content: center;
 `;
