@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { Button } from '../components/Button';
 import { Pagination } from '../components/Pagination';
@@ -10,7 +10,9 @@ import { FilmCardsList } from '../components/FilmCardsList';
 import { getPagesArray } from '../utils/pages';
 
 export const Search = () => {
-    let navigate = useNavigate();
+    const [searchParams, setSearchParams] = useSearchParams();
+    const searchQuery = searchParams.get('keyword') || '';
+    const pageQuery = searchParams.get('page') || 1;
 
     const [word, setWord] = useState('');
     const [activePage, setActivePage] = useState(null);
@@ -19,12 +21,12 @@ export const Search = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [search, setSearch] = useState(false);
     const [error, setError] = useState('');
-    const [firstRender, setFirstRender] = useState(false);
+    const [pagesArray, setPagesArray] = useState(null);
 
     useEffect(async () => {
         setIsLoading(true);
         const fetchByKeyword = async () => {
-            let response = await fetch(SEARCH_BY_KEYWORD(word, activePage), {
+            let response = await fetch(SEARCH_BY_KEYWORD(searchQuery, pageQuery), {
                 method: 'GET',
                 headers: {
                     'X-API-KEY': 'f876a4a1-43e5-45e4-bbab-4efbf24a5835',
@@ -33,73 +35,74 @@ export const Search = () => {
             });
             response = await response.json();
             setFilms(response.films);
-
+            setActivePage(pageQuery);
             setTotalPages(response.pagesCount);
+            setPagesArray(getPagesArray(response.pagesCount));
         };
 
         await fetchByKeyword();
         setIsLoading(false);
-    }, [search, activePage, firstRender]);
+    }, [search, activePage]);
 
     useEffect(() => {
         if (totalPages === 0 && word) {
-            navigate(`/search`);
             setError('Ничего не найдено');
         }
         if (totalPages !== 0 && totalPages !== null) {
-            setActivePage(1);
-            navigate(`/search/1`);
             setError('');
         }
         if (totalPages !== 0 && totalPages !== null && !word) {
-            setActivePage(null);
-            setTotalPages(null);
-            navigate(`/search`);
-            setError('');
+            setWord(searchQuery);
         }
     }, [search, totalPages]);
+
+    const params = {};
 
     const findFilm = (e) => {
         e.preventDefault();
 
         if (word) {
+            params.keyword = e.target.searchInp.value;
+            setSearchParams({ keyword: params.keyword, page: pageQuery });
             setSearch(!search);
-            setActivePage(1);
         } else if (!word) {
-            setError('Впишите название ключевого слова');
-        } else if (!word && activePage) {
-            setSearch(!search);
-            setActivePage(1);
+            setError('Впишите название фильма');
+            setSearchParams('');
+            setFilms([]);
+            setPagesArray(null);
         }
     };
 
     const Clean = () => {
         setTotalPages(null);
         setFilms([]);
+        setSearchParams('');
         setWord('');
+        setPagesArray(null);
         setError('');
         setActivePage(null);
-        console.log(111);
     };
-    let pagesArray = getPagesArray(totalPages);
+
     return (
         <Wrapper>
             <SearchWrapper onSubmit={findFilm}>
                 <Title>
-                    {totalPages === 0 || totalPages === null
-                        ? `Искать фильм по названию :`
-                        : `Результат поиска по запросу: ${word}`}
+                    {searchQuery
+                        ? `Результат поиска по запросу: ${searchQuery}`
+                        : `Искать фильм по названию :`}
                 </Title>
-                <Input onChange={(event) => setWord(event.target.value)} value={word} />
-                <Button type="submit" disabled={isLoading}>
+                <Input
+                    onChange={(event) => setWord(event.target.value)}
+                    name="searchInp"
+                    value={word}
+                />
+                <Button type="submit" isSucces disabled={isLoading}>
                     Искать
                 </Button>
-                {totalPages > 0 ? (
+                {searchQuery && (
                     <Button onClick={Clean} type="button" isDelete>
                         Очистить
                     </Button>
-                ) : (
-                    ''
                 )}
             </SearchWrapper>
 
@@ -109,11 +112,14 @@ export const Search = () => {
                     <div className="loader"></div>
                 </Loader>
             )}
-            {error && error}
+            {error && <Error>{error}</Error>}
+
             <Pagination
                 pagesArray={pagesArray}
                 activePage={activePage}
                 setActivePage={setActivePage}
+                setSearchParams={setSearchParams}
+                searchQuery={searchQuery}
             />
         </Wrapper>
     );
@@ -146,10 +152,26 @@ const Input = styled.input`
 const SearchWrapper = styled.form`
     display: flex;
     align-items: center;
+    justify-content: center;
+    margin: 2rem 0 3rem;
 `;
 
 const CardWrapper = styled.div`
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+`;
+
+const Error = styled.div`
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    padding: 1rem 0;
+    background-color: red;
+    color: #fff;
+    font-size: var(--fz-sm);
+    font-weight: var(--fw-normal);
+    width: 250px;
+    border-radius: var(--radii);
+    box-shadow: var(--shadow);
 `;
