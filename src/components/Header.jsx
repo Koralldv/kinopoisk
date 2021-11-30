@@ -12,7 +12,7 @@ export const Header = ({ links }) => {
         document.body.setAttribute('data-theme', theme);
     }, [theme]);
 
-    const setActive = ({ isActive }) => (isActive ? 'activeLink' : '');
+    const setActive = ({ isActive }) => (isActive ? 'activeLink' : 'notActiveLink');
 
     return (
         <Wrapper>
@@ -83,7 +83,6 @@ const Menu = styled.ul`
 const MenuItem = styled.li`
     padding: 0 1rem;
     height: 56px;
-    color: var(--colors-text);
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -91,7 +90,11 @@ const MenuItem = styled.li`
     font-weight: var(--fw-normal);
 
     &: hover {
-        background: red;
+        background-color: red;
+        color: #fff;
+        svg {
+            color: #fff;
+        }
     }
 `;
 
