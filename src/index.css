@@ -46,6 +46,11 @@ body[data-theme='light'] {
 
 .activeLink {
   background-color: red;
+  color: #ffffff;
+}
+
+.notActiveLink {
+  color: var(--colors-text);
 }
 
 a {
