@@ -23,9 +23,10 @@ export const Search = () => {
     const [error, setError] = useState('');
     const [pagesArray, setPagesArray] = useState(null);
 
-    useEffect(async () => {
-        setIsLoading(true);
+    useEffect(() => {
+        // setIsLoading(true);
         const fetchByKeyword = async () => {
+            setIsLoading(true);
             let response = await fetch(SEARCH_BY_KEYWORD(searchQuery, pageQuery), {
                 method: 'GET',
                 headers: {
@@ -38,10 +39,10 @@ export const Search = () => {
             setActivePage(pageQuery);
             setTotalPages(response.pagesCount);
             setPagesArray(getPagesArray(response.pagesCount));
+            setIsLoading(false);
         };
 
-        await fetchByKeyword();
-        setIsLoading(false);
+        fetchByKeyword();
     }, [search, activePage]);
 
     useEffect(() => {
