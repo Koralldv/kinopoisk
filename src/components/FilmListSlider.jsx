@@ -17,7 +17,7 @@ export const FilmListSlider = ({
 }) => {
     return (
         <>
-            {filmList.length !== 0 && (
+            {filmList && (
                 <>
                     <TitleBlock>{title}</TitleBlock>
                     <Slider
