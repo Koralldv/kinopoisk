@@ -39,11 +39,14 @@ const Btn = styled.button`
     border: none;
     padding: 1rem 2rem;
     cursor: pointer;
-    margin: 1rem 1rem 1rem 0;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: ${(props) => (props.margin && props.margin === 'left' ? 'row-reverse' : 'row')};
+    margin: ${(props) =>
+        props.margin && props.margin !== 'left' && props.margin !== 'right'
+            ? props.margin
+            : '1rem 1rem 1rem 0'};
     background-color: ${(props) =>
         props.isActive === 'active' || props.isActive === 'active' ? 'red' : ''};
     background-color: ${(props) => (props.isDelete ? 'red' : '')};
