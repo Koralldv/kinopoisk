@@ -18,7 +18,6 @@ export const Categories = () => {
     matches.top = useMatch('/films/top');
     matches.best = useMatch('/films/best');
     matches.popular = useMatch('/films/popular');
-    console.log(matches);
 
     const [activePage, setActivePage] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
