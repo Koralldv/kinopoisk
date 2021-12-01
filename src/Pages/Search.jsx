@@ -24,7 +24,6 @@ export const Search = () => {
     const [pagesArray, setPagesArray] = useState(null);
 
     useEffect(() => {
-        // setIsLoading(true);
         const fetchByKeyword = async () => {
             setIsLoading(true);
             let response = await fetch(SEARCH_BY_KEYWORD(searchQuery, pageQuery), {
