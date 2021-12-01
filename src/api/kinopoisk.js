@@ -16,4 +16,4 @@ export const FRAMES = (id) => BASE_URL_21 + `/${id}/frames`
 
 export const SEARCH_BY_KEYWORD  = (word, page) => BASE_URL_21 + `/search-by-keyword?keyword=${word}&page=${page}`;
 
-export const TOP = (type) => BASE_URL_22 + `/top?type=${type}&page=1`
+export const TOP = (type, page) => BASE_URL_22 + `/top?type=${type}&page=${page}`
