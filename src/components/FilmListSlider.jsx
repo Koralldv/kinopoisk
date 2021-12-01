@@ -14,12 +14,15 @@ export const FilmListSlider = ({
     slidesPerGroup,
     slidesPerView,
     breaks,
+    pathAll,
+    text,
 }) => {
     return (
         <>
             {filmList && (
                 <>
                     <TitleBlock>{title}</TitleBlock>
+                    {pathAll && text && <FullPageLink to={pathAll}>{text}</FullPageLink>}
                     <Slider
                         sliderName={sliderName}
                         spaceBetween={spaceBetween}
@@ -64,14 +67,21 @@ const TitleBlock = styled.h3`
     color: var(--colors-text);
     font-size: var(--fz-xl);
     font-weight: var(--fw-bold);
-    margin: 0 0 2rem 0;
+    margin: 0;
     text-transform: capitalize;
+`;
+
+const FullPageLink = styled(Link)`
+    text-decoration: none;
+    color: var(--colors-text);
+    font-size: var(--fz-sm);
+    font-weight: var(--fw-bold);
 `;
 
 const Card = styled.div`
     width: 100%;
     height: 420px;
-    margin: 1rem 0;
+    margin: 2rem 0 1rem;
     border-radius: var(--radii);
     box-shadow: var(--shadow);
 `;
