@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 import { TOP } from '../api/kinopoisk';
 
@@ -12,10 +13,10 @@ export const Films = () => {
     const [filmListPopular, setFilmListPopular] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
-    useEffect(async () => {
+    useEffect(() => {
         setIsLoading(false);
         const fetchTop = async () => {
-            let response = await fetch(TOP('TOP_AWAIT_FILMS'), {
+            let response = await fetch(TOP('TOP_AWAIT_FILMS', 1), {
                 method: 'GET',
                 headers: {
                     'X-API-KEY': 'f876a4a1-43e5-45e4-bbab-4efbf24a5835',
@@ -27,7 +28,7 @@ export const Films = () => {
             setIsLoading(true);
         };
         const fetchBest = async () => {
-            let response = await fetch(TOP('TOP_250_BEST_FILMS'), {
+            let response = await fetch(TOP('TOP_250_BEST_FILMS', 1), {
                 method: 'GET',
                 headers: {
                     'X-API-KEY': 'f876a4a1-43e5-45e4-bbab-4efbf24a5835',
@@ -39,7 +40,7 @@ export const Films = () => {
             setIsLoading(true);
         };
         const fetchPopular = async () => {
-            let response = await fetch(TOP('TOP_100_POPULAR_FILMS'), {
+            let response = await fetch(TOP('TOP_100_POPULAR_FILMS', 1), {
                 method: 'GET',
                 headers: {
                     'X-API-KEY': 'f876a4a1-43e5-45e4-bbab-4efbf24a5835',
@@ -50,14 +51,15 @@ export const Films = () => {
             setFilmListPopular(response.films);
             setIsLoading(true);
         };
-        await fetchTop();
-        await fetchBest();
-        await fetchPopular();
+        fetchTop();
+        fetchBest();
+        fetchPopular();
     }, []);
 
     return (
         <Wrapper>
             <Title>Лучшие подборки фильмов от Кинопоиска</Title>
+            <FullPageLink to={`/films/top/`}>посмотреть все 100 фильмы</FullPageLink>
             {!isLoading && (
                 <Loader>
                     <div className="loader"></div>
@@ -200,4 +202,11 @@ const Title = styled.h1`
     @media (max-width: 768px) {
         margin: 2rem 0;
     }
+`;
+
+const FullPageLink = styled(Link)`
+    text-decoration: none;
+    color: var(--colors-text);
+    font-size: var(--fz-sm);
+    font-weight: var(--fw-bold);
 `;
