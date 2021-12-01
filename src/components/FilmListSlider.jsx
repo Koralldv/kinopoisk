@@ -3,6 +3,9 @@ import styled from 'styled-components';
 
 import { Slider } from './Slider';
 import { SwiperSlide } from 'swiper/react';
+import { Button } from './Button';
+
+import { IoArrowForwardOutline } from 'react-icons/io5';
 
 import { Link } from 'react-router-dom';
 export const FilmListSlider = ({
@@ -21,8 +24,16 @@ export const FilmListSlider = ({
         <>
             {filmList && (
                 <>
-                    <TitleBlock>{title}</TitleBlock>
-                    {pathAll && text && <FullPageLink to={pathAll}>{text}</FullPageLink>}
+                    <Top>
+                        <TitleBlock>{title}</TitleBlock>
+                        {pathAll && text && (
+                            <FullPageLink to={pathAll}>
+                                <Button icon={IoArrowForwardOutline} margin="left">
+                                    {text}
+                                </Button>
+                            </FullPageLink>
+                        )}
+                    </Top>
                     <Slider
                         sliderName={sliderName}
                         spaceBetween={spaceBetween}
@@ -67,8 +78,13 @@ const TitleBlock = styled.h3`
     color: var(--colors-text);
     font-size: var(--fz-xl);
     font-weight: var(--fw-bold);
-    margin: 0;
+    margin: 0 1rem 0 0;
     text-transform: capitalize;
+`;
+
+const Top = styled.div`
+    display: flex;
+    align-items: center;
 `;
 
 const FullPageLink = styled(Link)`
