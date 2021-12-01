@@ -15,6 +15,10 @@ export const BreadCrumbs = () => {
     const searchMatches = useMatch('/search');
     const filmMatches = useMatch('/films/:filmId');
 
+    const topMatches = useMatch('/films/top');
+    const bestMatches = useMatch('/films/best');
+    const popularMatches = useMatch('/films/popular');
+
     const { filmId } = useParams();
     const navigate = useNavigate();
 
@@ -44,20 +48,23 @@ export const BreadCrumbs = () => {
                 <Breadcrumbs>
                     <Button onClick={() => navigate(-1)}>Назад</Button>
                     <LinkItem to="/">Главная</LinkItem>
+
                     {notFoundMatches !== null ? <PageName>Не найдено</PageName> : ''}
-                    {aboutMatches ? <PageName>О нас</PageName> : ''}
-                    {showsMatches ? <PageName>Шоу</PageName> : ''}
-                    {filmsMatches ? <PageName>Фильмы</PageName> : ''}
-                    {contactsMatches ? <PageName>Конткты</PageName> : ''}
-                    {searchMatches ? <PageName>Поиск фильмов</PageName> : ''}
+                    {aboutMatches && <PageName>О нас</PageName>}
+                    {showsMatches && <PageName>Шоу</PageName>}
+                    {filmsMatches && <PageName>Фильмы</PageName>}
+                    {contactsMatches && <PageName>Конткты</PageName>}
+                    {searchMatches && <PageName>Поиск фильмов</PageName>}
+
                     {filmMatches && (
                         <>
                             <LinkItem to="/films">Фильмы</LinkItem>
-                            <PageName>
-                                {isLoading === true ? film.nameRu || film.nameOriginal : ''}
-                            </PageName>
+                            <PageName>{isLoading ? film.nameRu || film.nameOriginal : ''}</PageName>
                         </>
                     )}
+                    {topMatches && <PageName>Топ ожидаемых</PageName>}
+                    {bestMatches && <PageName>Топ 250 лучших</PageName>}
+                    {popularMatches && <PageName>Топ 100 самых популярных</PageName>}
                 </Breadcrumbs>
             )}
         </>
