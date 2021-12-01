@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { SINGLE_FILM, FRAMES } from '../api/kinopoisk';
 
 import { Slider } from '../components/Slider';
+import { Loader } from '../components/Loader';
 
 import {
     IoPersonSharp,
@@ -25,14 +26,12 @@ SwiperCore.use([Pagination, Navigation]);
 
 export const Film = () => {
     const { filmId } = useParams();
-    // const navigate = useNavigate();
-    // console.log(useNavigate());
     const [film, setFilm] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [frames, setFrames] = useState(null);
 
-    useEffect(async () => {
-        setIsLoading(false);
+    useEffect(() => {
+        setIsLoading(true);
 
         const fetchSingleFilm = async () => {
             let response = await fetch(SINGLE_FILM(filmId), {
@@ -44,6 +43,8 @@ export const Film = () => {
             });
             response = await response.json();
             setFilm(response);
+            setIsLoading(false);
+            console.log(response);
         };
 
         const fetchFramesFilm = async () => {
@@ -58,14 +59,18 @@ export const Film = () => {
             setFrames(responses);
         };
 
-        await fetchSingleFilm();
-        await fetchFramesFilm();
-        setIsLoading(true);
+        fetchSingleFilm();
+        fetchFramesFilm();
     }, [filmId]);
 
     return (
         <Wrapper>
-            {isLoading ? (
+            {isLoading && (
+                <Loader>
+                    <div className="loader"></div>
+                </Loader>
+            )}
+            {film && (
                 <About>
                     <Img src={film.posterUrl} />
                     <Info>
@@ -146,8 +151,6 @@ export const Film = () => {
                         </Persons>
                     </Info>
                 </About>
-            ) : (
-                'loading...'
             )}
         </Wrapper>
     );
