@@ -109,17 +109,19 @@ export const Footer = () => {
 };
 
 const Wrap = styled.footer`
-    padding: 3rem 3rem 4rem 3rem;
+    padding: 2rem;
+
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     background-color: var(--colors-ui-base);
     box-shadow: var(--shadow);
+    flex-direction: column;
 
-    @media (max-width: 456px) {
-        flex-direction: column;
-        padding: 2rem;
+    @media (min-width: 456px) {
+        flex-direction: row;
+        padding: 3rem 2rem 4rem;
     }
 `;
 
