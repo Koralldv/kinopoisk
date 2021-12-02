@@ -21,9 +21,9 @@ export const Statistics = ({ stats }) => {
 };
 
 const Wrapper = styled.div`
-    padding: 3rem;
+    padding: 3rem 1rem;
     background-color: var(--colors-bg);
-    @media (max-width: 425px) {
+    @media (min-width: 425px) {
         padding: 3rem 2rem;
     }
 `;
@@ -38,19 +38,25 @@ const Title = styled.h2`
 `;
 const StatList = styled.ul`
     list-style: none;
-    margin: 0 auto;
     padding: 0;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    width: 50%;
-    @media (max-width: 768px) {
-        width: 100%;
-        margin: 0 0 2rem 0;
+    width: 100%;
+    margin: 0 0 2rem 0;
+    @media (min-width: 768px) {
+        flex-direction: row;
+        margin: 0 auto;
+        width: 50%;
     }
 `;
 const StatItem = styled.li`
     display: flex;
     flex-direction: column;
+    margin-bottom: 2rem;
+    @media (min-width: 768px) {
+        margin: 0;
+    }
 `;
 const Icon = styled.i`
     margin: 0 auto;
