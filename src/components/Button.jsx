@@ -6,6 +6,7 @@ export const Button = ({
     icon,
     children,
     margin,
+    padding,
     onClick,
     isActive,
     isDelete,
@@ -15,13 +16,14 @@ export const Button = ({
     return (
         <Btn
             margin={margin}
+            padding={padding}
             isDelete={isDelete}
             isSucces={isSucces}
             isActive={isActive}
             onClick={onClick}
             disabled={disabled}>
             {icon && (
-                <Icon margin={margin} icon>
+                <Icon padding={padding} icon>
                     {React.createElement(icon, { size: '18px' })}
                 </Icon>
             )}
@@ -42,11 +44,9 @@ const Btn = styled.button`
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: ${(props) => (props.margin && props.margin === 'left' ? 'row-reverse' : 'row')};
-    margin: ${(props) =>
-        props.margin && props.margin !== 'left' && props.margin !== 'right'
-            ? props.margin
-            : '1rem 1rem 1rem 0'};
+    flex-direction: ${(props) =>
+        props.padding && props.padding === 'left' ? 'row-reverse' : 'row'};
+    margin: ${(props) => (props.margin ? props.margin : '1rem 1rem 1rem 0')};
     background-color: ${(props) =>
         props.isActive === 'active' || props.isActive === 'active' ? 'red' : ''};
     background-color: ${(props) => (props.isDelete ? 'red' : '')};
@@ -57,6 +57,6 @@ const Btn = styled.button`
 
 const Icon = styled.i`
     display: flex;
-    margin-left: ${(props) => (props.margin && props.margin === 'left' ? '.5rem' : '0')};
-    margin-right: ${(props) => (props.margin && props.margin === 'right' ? '.5rem' : '0')};
+    margin-left: ${(props) => (props.padding && props.padding === 'left' ? '.5rem' : '0')};
+    margin-right: ${(props) => (props.padding && props.padding === 'right' ? '.5rem' : '0')};
 `;
