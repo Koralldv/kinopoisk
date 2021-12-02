@@ -28,7 +28,7 @@ export const FilmListSlider = ({
                         <TitleBlock>{title}</TitleBlock>
                         {pathAll && text && (
                             <FullPageLink to={pathAll}>
-                                <Button icon={IoArrowForwardOutline} margin="left">
+                                <Button icon={IoArrowForwardOutline} padding="left">
                                     {text}
                                 </Button>
                             </FullPageLink>

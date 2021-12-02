@@ -33,10 +33,10 @@ export const MainSlider = () => {
                             ))}
                             <Desc>{item.desc}</Desc>
                             <Buttons>
-                                <Button icon={IoArrowForwardOutline} margin="left">
+                                <Button icon={IoArrowForwardOutline} padding="left">
                                     Смотреть
                                 </Button>
-                                <Button icon={IoHeart} margin="right">
+                                <Button icon={IoHeart} padding="right">
                                     В избранное
                                 </Button>
                             </Buttons>
