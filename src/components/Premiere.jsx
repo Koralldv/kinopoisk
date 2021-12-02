@@ -9,15 +9,18 @@ export const Premiere = () => {
     const [filmList, setFilmList] = useState('');
 
     useEffect(() => {
-        fetch(PREMIERE, {
-            method: 'GET',
-            headers: {
-                'X-API-KEY': 'f876a4a1-43e5-45e4-bbab-4efbf24a5835',
-                'Content-Type': 'application/json',
-            },
-        })
-            .then((res) => res.json())
-            .then((json) => setFilmList(json));
+        const fetchPremiere = async () => {
+            let response = await fetch(PREMIERE, {
+                method: 'GET',
+                headers: {
+                    'X-API-KEY': 'f876a4a1-43e5-45e4-bbab-4efbf24a5835',
+                    'Content-Type': 'application/json',
+                },
+            });
+            response = await response.json();
+            setFilmList(response);
+        };
+        fetchPremiere();
     }, []);
 
     return (
@@ -26,7 +29,7 @@ export const Premiere = () => {
                 <FilmListSlider
                     filmList={filmList.items}
                     path="films"
-                    title="премьера"
+                    title="премьеры"
                     sliderName="premieres"
                     spaceBetween={0}
                     slidesPerGroup={1}
