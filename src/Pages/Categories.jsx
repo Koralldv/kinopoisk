@@ -33,7 +33,9 @@ export const Categories = () => {
         } else if (matches.popular) {
             setWord('TOP_250_BEST_FILMS');
         }
+    }, [matches]);
 
+    useEffect(() => {
         const fetchTop = async () => {
             setIsLoading(false);
             let response = await fetch(TOP(word, pageQuery), {
