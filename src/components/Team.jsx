@@ -45,9 +45,9 @@ export const Team = () => {
 };
 
 const Wrapper = styled.div`
-padding: 3rem;
+    padding: 3rem 1rem;
     background-color: var(--colors-bg);
-    @media (max-width: 425px) {
+    @media (min-width: 425px) {
         padding: 3rem 2rem;`;
 
 const Title = styled.h2`
