@@ -50,13 +50,16 @@ export const MainSlider = () => {
 
 const Wrapper = styled.div`
     width: 100vw;
-    height: calc(100vh - 56px);
-    margin-top: 56px;
-    padding: 0 2rem;
+    height: calc(100vh);
+    padding: 64px 1rem 0;
     display: flex;
     align-items: center;
     position: relative;
     z-index: 2;
+
+    @media (min-width: 725px) {
+        padding: 0 2rem;
+    }
 `;
 
 const RgbaBg = styled.div`
@@ -65,9 +68,12 @@ const RgbaBg = styled.div`
     left: 0;
     top: 0;
     bottom: 0;
-    background: var(--colors-bg);
     z-index: -1;
+    backdrop-filter: blur(50px);
     width: 40%;
+    @media (max-width: 725px) {
+        display: none;
+    }
 `;
 
 const Img = styled.img`
