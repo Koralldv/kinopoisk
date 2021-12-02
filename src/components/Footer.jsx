@@ -1,11 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
-import { IoLogoFacebook, IoLogoTwitter, IoLogoInstagram, IoLogoYoutube } from 'react-icons/io5';
+import {
+    IoLogoFacebook,
+    IoLogoTwitter,
+    IoLogoInstagram,
+    IoLogoYoutube,
+    IoArrowForwardOutline,
+} from 'react-icons/io5';
 import { NavLink } from 'react-router-dom';
 
 const links = [
     {
-        title: 'Display type',
+        title: 'Главные',
         list: [
             {
                 name: 'Главная',
@@ -13,78 +19,32 @@ const links = [
             },
             {
                 name: 'Фильмы',
-                link: '/movies',
-            },
-            {
-                name: 'Шоу',
-                link: '/shows',
+                link: '/films',
             },
             {
                 name: 'О нас',
                 link: '/about',
             },
-        ],
-    },
-    {
-        title: 'two',
-        list: [
             {
-                name: 'home',
-                link: '',
-            },
-            {
-                name: 'movies',
-                link: 'movies',
-            },
-            {
-                name: 'shows',
-                link: 'shows',
-            },
-            {
-                name: 'about',
-                link: 'about',
+                name: 'Контакты',
+                link: '/contacts',
             },
         ],
     },
     {
-        title: 'three',
+        title: 'Подборки',
         list: [
             {
-                name: 'home',
-                link: '',
+                name: 'Топ ожидаемых',
+                link: '/films/top',
             },
             {
-                name: 'movies',
-                link: 'movies',
+                name: 'Топ 250 лучших',
+                link: '/films/best',
             },
             {
-                name: 'shows',
-                link: 'shows',
-            },
-            {
-                name: 'about',
-                link: 'about',
-            },
-        ],
-    },
-    {
-        title: 'four',
-        list: [
-            {
-                name: 'home',
-                link: '',
-            },
-            {
-                name: 'movies',
-                link: 'movies',
-            },
-            {
-                name: 'shows',
-                link: 'shows',
-            },
-            {
-                name: 'about',
-                link: 'about',
+                name: 'Топ 100 популярных',
+                link: '/films/top',
             },
         ],
     },
@@ -114,8 +74,24 @@ const social = [
 ];
 
 export const Footer = () => {
+    const setActive = ({ isActive }) => (isActive ? 'activeLinkNav' : 'notActiveLinkNav');
     return (
         <Wrap>
+            <Nav>
+                {links.map((list, index) => (
+                    <List key={`${list.title}_${index}`}>
+                        <ListTitle>{list.title}</ListTitle>
+                        {list.list.map((link) => (
+                            <NavLink key={`${link.name}`} className={setActive} to={link.link}>
+                                <ListLink>
+                                    <ListItem>{link.name}</ListItem>
+                                    <IoArrowForwardOutline size="12px" />
+                                </ListLink>
+                            </NavLink>
+                        ))}
+                    </List>
+                ))}
+            </Nav>
             <About>
                 {/* <Logo></Logo> */}
                 <div>Logo</div>
@@ -128,16 +104,6 @@ export const Footer = () => {
                     ))}
                 </Social>
             </About>
-            {links.map((list, index) => (
-                <List key={`${list.title}_${index}`}>
-                    <ListTitle>{list.title}</ListTitle>
-                    {list.list.map((link) => (
-                        <ListLink key={`${link.name}`} to={link.link}>
-                            <ListItem>{link.name}</ListItem>
-                        </ListLink>
-                    ))}
-                </List>
-            ))}
         </Wrap>
     );
 };
@@ -147,6 +113,7 @@ const Wrap = styled.footer`
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    align-items: center;
     background-color: var(--colors-ui-base);
     box-shadow: var(--shadow);
 
@@ -155,10 +122,15 @@ const Wrap = styled.footer`
         padding: 2rem;
     }
 `;
+
+const Nav = styled.div`
+    display: flex;
+`;
+
 const About = styled.div`
     max-width: 400px;
 `;
-const Logo = styled.img``;
+// const Logo = styled.img``;
 const Slogan = styled.span`
     font-size: var(--fz-md);
     font-weight: var(--fw-normal);
@@ -176,7 +148,7 @@ const SocialItem = styled.li`
 `;
 const List = styled.ul`
     list-style: none;
-    margin: 0;
+    margin: 0 2rem 0 0;
     padding: 0;
     @media (max-width: 456px) {
         margin-bottom: 1rem;
@@ -194,7 +166,7 @@ const ListTitle = styled.span`
 const ListItem = styled.li`
     font-size: var(--fz-md);
     font-weight: var(--fw-normal);
-    margin-bottom: 0.2rem;
+    margin: 0 0.5rem 0.2rem 0;
 `;
 
 const SocialLink = styled.a`
@@ -207,10 +179,11 @@ const SocialLink = styled.a`
     }
 `;
 
-const ListLink = styled(NavLink)`
+const ListLink = styled.span`
     text-decoration: none;
-    color: var(--colors-text);
     transition: color 0.2s linear;
+    display: flex;
+    align-items: center;
 
     &:hover {
         color: red;
