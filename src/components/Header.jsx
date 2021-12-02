@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import React, { useState, useEffect } from 'react';
-import { IoSearchSharp, IoMoon, IoMoonOutline, IoPerson } from 'react-icons/io5';
+import { IoSearchSharp, IoMoon, IoMoonOutline, IoPerson, IoReorderFour } from 'react-icons/io5';
 import { NavLink } from 'react-router-dom';
 
 export const Header = ({ links }) => {
@@ -8,49 +8,78 @@ export const Header = ({ links }) => {
 
     const toggleTheme = () => setTheme(theme === 'light' ? 'dark' : 'light');
 
+    const [triggerBurger, setTriggerBurger] = useState();
+
     useEffect(() => {
         document.body.setAttribute('data-theme', theme);
     }, [theme]);
+
+    const [widthScreen, setWidthScreen] = useState(null);
+
+    useEffect(() => {
+        setWidthScreen(window.innerWidth);
+        function handleResize(e) {
+            setWidthScreen(e.currentTarget.innerWidth);
+            console.log(e.currentTarget.innerWidth);
+        }
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     const setActive = ({ isActive }) => (isActive ? 'activeLink' : 'notActiveLink');
 
     return (
         <Wrapper>
             <Head>
-                <Menu>
-                    {links.map((link) => (
-                        <NavLink key={`${link.title}`} className={setActive} to={`${link.path}`}>
-                            <MenuItem>{`${link.title}`}</MenuItem>
-                        </NavLink>
-                    ))}
-                </Menu>
-                <SideMenu>
-                    <NavLink to="/search" className={setActive}>
-                        <MenuItem>
-                            <IoSearchSharp size="20px" />
-                        </MenuItem>
-                    </NavLink>
-                    <MenuItem>
-                        <IoPerson size="20px" />
-                    </MenuItem>
-                    <MenuItem onClick={toggleTheme}>
-                        <ModeSwitcher>
-                            {theme === 'light' ? (
-                                <IoMoonOutline size="20px" />
-                            ) : (
-                                <IoMoon size="20px" />
-                            )}
-                        </ModeSwitcher>
-                    </MenuItem>
-                </SideMenu>
+                {widthScreen < 768 && (
+                    <Burger onClick={() => setTriggerBurger(!triggerBurger)}>
+                        <IoReorderFour size="28px" />
+                    </Burger>
+                )}
+
+                {widthScreen > 768 || triggerBurger ? (
+                    <>
+                        <Menu>
+                            {links.map((link) => (
+                                <NavLink
+                                    key={`${link.title}`}
+                                    className={setActive}
+                                    to={`${link.path}`}>
+                                    <MenuItem>{`${link.title}`}</MenuItem>
+                                </NavLink>
+                            ))}
+                        </Menu>
+                        <SideMenu>
+                            <NavLink to="/search" className={setActive}>
+                                <MenuItem>
+                                    <IoSearchSharp size="20px" />
+                                </MenuItem>
+                            </NavLink>
+                            <MenuItem>
+                                <IoPerson size="20px" />
+                            </MenuItem>
+                            <MenuItem onClick={toggleTheme}>
+                                <ModeSwitcher>
+                                    {theme === 'light' ? (
+                                        <IoMoonOutline size="20px" />
+                                    ) : (
+                                        <IoMoon size="20px" />
+                                    )}
+                                </ModeSwitcher>
+                            </MenuItem>
+                        </SideMenu>
+                    </>
+                ) : (
+                    ''
+                )}
             </Head>
         </Wrapper>
     );
 };
 
 const Wrapper = styled.div`
-    width: 100%;
-    padding: 0 2rem;
+    padding: 0;
     background-color: var(--colors-ui-base);
     box-shadow: var(--shadow);
     z-index: 9999;
@@ -58,6 +87,9 @@ const Wrapper = styled.div`
     position: fixed;
     top: 0;
     left: 0;
+    @media (min-width: 767px) {
+        padding: 0 2rem;
+    }
 `;
 
 const Head = styled.header`
@@ -72,17 +104,38 @@ const Head = styled.header`
     }
 `;
 
+const Burger = styled.span`
+    color: var(--colors-text);
+    background-color: red;
+    height: 64px;
+    width: 64px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: 0;
+    top: 0;
+    position: fixed;
+`;
+
 const Menu = styled.ul`
     display: flex;
+    flex-direction: column;
     list-style: none;
     padding: 0;
-    margin: 0;
-    align-items: center;
+    margin: 65px 0 0 0;
+    width: 100%;
+    @media (min-width: 767px) {
+        margin: 0;
+        flex-direction: row;
+        align-items: center;
+    }
 `;
 
 const MenuItem = styled.li`
     padding: 0 1rem;
-    height: 56px;
+    justify-content: center;
+    height: 64px;
+    min-width: 64px;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -104,6 +157,11 @@ const SideMenu = styled.div`
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
+
+    @media (max-width: 767px) {
+        position: absolute;
+        right: 0;
+    }
 `;
 
 const ModeSwitcher = styled.div`
