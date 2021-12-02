@@ -84,7 +84,12 @@ const TitleBlock = styled.h3`
 
 const Top = styled.div`
     display: flex;
-    align-items: center;
+    flex-direction: column;
+
+    @media (min-width: 768px) {
+        align-items: center;
+        flex-direction: row;
+    }
 `;
 
 const FullPageLink = styled(Link)`
