@@ -87,7 +87,8 @@ const PageName = styled.span`
 `;
 
 const Breadcrumbs = styled.div`
-    margin: 5rem 0 0 3rem;
+    margin: 5rem 0 0 2rem;
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
 `;
