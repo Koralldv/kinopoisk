@@ -37,7 +37,7 @@ export const Categories = () => {
 
     useEffect(() => {
         const fetchTop = async () => {
-            setIsLoading(false);
+            setIsLoading(true);
             let response = await fetch(TOP(word, pageQuery), {
                 method: 'GET',
                 headers: {
@@ -49,19 +49,19 @@ export const Categories = () => {
             setFilms(response.films);
             setActivePage(pageQuery);
             setPagesArray(getPagesArray(response.pagesCount));
-            setIsLoading(true);
+            setIsLoading(false);
         };
         fetchTop();
     }, [word, pageQuery]);
 
     return (
         <Wrapper>
-            {!isLoading && (
+            {isLoading && (
                 <Loader>
                     <div className="loader"></div>
                 </Loader>
             )}
-            <CardWrapper>{films && <FilmCardsList films={films} />}</CardWrapper>
+            <CardWrapper>{films && !isLoading && <FilmCardsList films={films} />}</CardWrapper>
 
             <Pagination
                 pagesArray={pagesArray}
