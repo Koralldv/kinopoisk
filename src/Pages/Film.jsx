@@ -14,6 +14,7 @@ import {
     IoFootballOutline,
     IoPlanetOutline,
     IoStar,
+    IoFilmOutline,
 } from 'react-icons/io5';
 
 import { SwiperSlide } from 'swiper/react';
@@ -21,6 +22,7 @@ import SwiperCore, { Pagination, Navigation } from 'swiper/core';
 
 import 'swiper/swiper-bundle.min.css';
 import 'swiper/swiper.min.css';
+import { Button } from '../components/Button';
 
 SwiperCore.use([Pagination, Navigation]);
 
@@ -110,13 +112,24 @@ export const Film = () => {
                         </List>
                         <Description>{film.description}</Description>
                         <Persons>
-                            <Rating>
-                                <Star>
-                                    <Mark>{film.ratingKinopoisk ? film.ratingKinopoisk : '?'}</Mark>
-                                    <IoStar />
-                                </Star>
-                                <Kinopoinsk>Рейтинг кинопоиска</Kinopoinsk>
-                            </Rating>
+                            <Badges>
+                                <Rating>
+                                    <Star>
+                                        <Mark>
+                                            {film.ratingKinopoisk ? film.ratingKinopoisk : '?'}
+                                        </Mark>
+                                        <IoStar />
+                                    </Star>
+                                    <Kinopoinsk>Рейтинг кинопоиска</Kinopoinsk>
+                                </Rating>
+                                <KinoLink
+                                    href={`https://www.kinopoisk.ru/film/${filmId}`}
+                                    target="_blank">
+                                    <Button icon={IoFilmOutline} margin="0" padding="left">
+                                        <span>Смотреть </span>
+                                    </Button>
+                                </KinoLink>
+                            </Badges>
                             <SliderWrap>
                                 <Slider
                                     sliderName="film"
@@ -168,6 +181,23 @@ const About = styled.div`
     align-items: space-between;
     @media (max-width: 768px) {
         flex-wrap: wrap;
+    }
+`;
+
+const Badges = styled.div`
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 1rem 0;
+
+    @media (max-width: 1425px) {
+        margin: 1rem 0;
+        width: 100%;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+    }
+    @media (max-width: 768px) {
+        justify-content: space-between;
     }
 `;
 
@@ -240,13 +270,21 @@ const Rating = styled.div`
     border-radius: var(--radii);
     padding: 1rem;
     max-width: 130px;
-    margin: 1rem 0;
+    margin: 0 1rem 1rem 0;
+    @media (max-width: 768px) {
+        margin: 0 1rem 0 0;
+    }
 `;
 
 const Star = styled.div`
     display: flex;
     align-items: center;
     margin-bottom: 0.3rem;
+`;
+
+const KinoLink = styled.a`
+    text-decoration: none;
+    color: var(--colors-text);
 `;
 
 const Mark = styled.span`
