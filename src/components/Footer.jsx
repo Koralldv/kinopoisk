@@ -44,7 +44,7 @@ const links = [
             },
             {
                 name: 'Топ 100 популярных',
-                link: '/films/top',
+                link: '/films/popular',
             },
         ],
     },
