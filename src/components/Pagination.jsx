@@ -22,7 +22,8 @@ export const Pagination = ({
                         key={p}
                         isActive={activePage == index + 1 ? 'active' : ''}
                         isDelete={activePage == index + 1 ? true : false}
-                        onClick={() => handlePag(index)}>
+                        onClick={() => handlePag(index)}
+                        margin=".5rem">
                         {p}
                     </Button>
                 ))}
@@ -34,4 +35,5 @@ const Paginations = styled.div`
     margin: 2rem 0;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 `;
