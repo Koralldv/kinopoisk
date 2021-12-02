@@ -53,6 +53,14 @@ body[data-theme='light'] {
   color: var(--colors-text);
 }
 
+.activeLinkNav {
+  color: red;
+}
+
+.notActiveLinkNav{
+ color: var(--colors-text);
+}
+
 a {
   text-decoration: none;
 }
