@@ -75,11 +75,19 @@ export const Categories = () => {
 };
 
 const Wrapper = styled.div`
-    margin: 3rem;
+    margin: 1rem;
+
+    @media (min-width: 768px) {
+        margin: 2rem;
+    }
 `;
 
 const CardWrapper = styled.div`
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     flex-wrap: wrap;
+
+    @media (min-width: 532px) {
+        justify-content: space-between;
+    }
 `;
