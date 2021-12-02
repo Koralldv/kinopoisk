@@ -107,12 +107,12 @@ export const Search = () => {
             </SearchWrapper>
 
             <CardWrapper>{<FilmCardsList films={films} />}</CardWrapper>
+            {error && <Error>{error}</Error>}
             {isLoading && (
                 <Loader>
                     <div className="loader"></div>
                 </Loader>
             )}
-            {error && <Error>{error}</Error>}
 
             <Pagination
                 pagesArray={pagesArray}
@@ -126,7 +126,10 @@ export const Search = () => {
 };
 
 const Wrapper = styled.div`
-    margin: 3rem;
+    margin: 3rem 1rem;
+    @media (min-width: 725px) {
+        margin: 3rem 2rem;
+    }
 `;
 
 const Title = styled.h2`
@@ -134,11 +137,12 @@ const Title = styled.h2`
     color: var(--colors-text);
     margin: 0 2rem 0 0;
     padding: 0;
+    max-width: 300px;
 `;
 
 const Input = styled.input`
     padding: 1rem;
-    margin: 0 1rem 0 0;
+    margin: 2rem 0 1rem;
     background-color: var(--colors-ui-base);
     color: var(--color-text);
     border: 0;
@@ -146,20 +150,29 @@ const Input = styled.input`
     font-weight: var(--fw-light);
     box-shadow: var(--shadow);
     border-radius: var(--radii);
-    width: 300px;
+    width: 100%;
+
+    @media (min-width: 768px) {
+        width: 300px;
+        margin: 0 1rem;
+    }
 `;
 
 const SearchWrapper = styled.form`
     display: flex;
     align-items: center;
-    justify-content: center;
     margin: 2rem 0 3rem;
+    flex-wrap: wrap;
 `;
 
 const CardWrapper = styled.div`
     display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
+    justify-content: center;
+
+    @media (min-width: 531px) {
+        justify-content: space-between;
+    }
 `;
 
 const Error = styled.div`
