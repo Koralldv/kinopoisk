@@ -26,15 +26,17 @@ export const Join = () => {
 
 const Wrapper = styled.div`
     margin: 0 auto;
-    padding: 3rem 2rem;
+    padding: 3rem 1rem;
     width: 100%;
     display: flex;
     align-items: center;
+    flex-direction: column;
     background-image: linear-gradient(to right, rgb(12, 21, 26), rgba(0, 0, 0, 0.69)),
         url('https://excellencetheme.com/templates/avastream/images/parallax/about.jpg');
     background-attachment: fixed;
-    @media (max-width: 768px) {
-        flex-direction: column;
+    @media (min-width: 768px) {
+        flex-direction: row;
+        padding: 3rem 2rem;
     }
 `;
 const Img = styled.img`
