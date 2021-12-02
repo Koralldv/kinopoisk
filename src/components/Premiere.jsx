@@ -68,6 +68,10 @@ export const Premiere = () => {
 
 const Wrapper = styled.div`
     width: 100%;
-    padding: 6rem 2rem;
+    padding: 6rem 1rem;
     background-color: var(--bg-color);
+
+    @media (min-width: 725px) {
+        padding: 6rem 2rem;
+    }
 `;
