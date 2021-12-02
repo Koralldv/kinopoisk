@@ -6,9 +6,12 @@ import { NavLink } from 'react-router-dom';
 export const Header = ({ links }) => {
     const [theme, setTheme] = useState('light');
 
-    const toggleTheme = () => setTheme(theme === 'light' ? 'dark' : 'light');
+    const toggleTheme = () => {
+        setTheme(theme === 'light' ? 'dark' : 'light');
+        setTriggerBurger(false);
+    };
 
-    const [triggerBurger, setTriggerBurger] = useState();
+    const [triggerBurger, setTriggerBurger] = useState(false);
 
     useEffect(() => {
         document.body.setAttribute('data-theme', theme);
@@ -45,13 +48,17 @@ export const Header = ({ links }) => {
                                 <NavLink
                                     key={`${link.title}`}
                                     className={setActive}
-                                    to={`${link.path}`}>
+                                    to={`${link.path}`}
+                                    onClick={() => setTriggerBurger(false)}>
                                     <MenuItem>{`${link.title}`}</MenuItem>
                                 </NavLink>
                             ))}
                         </Menu>
                         <SideMenu>
-                            <NavLink to="/search" className={setActive}>
+                            <NavLink
+                                to="/search"
+                                onClick={() => setTriggerBurger(false)}
+                                className={setActive}>
                                 <MenuItem>
                                     <IoSearchSharp size="20px" />
                                 </MenuItem>
