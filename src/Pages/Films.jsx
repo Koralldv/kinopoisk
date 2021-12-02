@@ -196,18 +196,23 @@ export const Films = () => {
 
 const Wrapper = styled.div`
     width: 100%;
-    padding: 6rem 2rem;
+    padding: 1rem;
     background-color: var(--bg-color);
+
+    @media (min-width: 768px) {
+        padding: 6rem 2rem;
+    }
 `;
 
 const Title = styled.h1`
-    font-size: var(--fz-xxl);
+    font-size: var(--fz-xl);
     color: var(--colors-text);
-    margin: 0 0 4rem 0;
+    margin: 2rem 0;
     padding: 0;
     text-transform: uppercase;
     word-wrap: break-word;
-    @media (max-width: 768px) {
-        margin: 2rem 0;
+    @media (min-width: 768px) {
+        margin: 0 0 4rem 0;
+        font-size: var(--fz-xxl);
     }
 `;
