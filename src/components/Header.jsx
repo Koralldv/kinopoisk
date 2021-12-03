@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { IoSearchSharp, IoMoon, IoMoonOutline, IoPerson, IoReorderFour } from 'react-icons/io5';
 import { NavLink } from 'react-router-dom';
 
-export const Header = ({ links }) => {
+export const Header = ({ links, social }) => {
     const [theme, setTheme] = useState('light');
 
     const toggleTheme = () => {
@@ -23,7 +23,6 @@ export const Header = ({ links }) => {
         setWidthScreen(window.innerWidth);
         function handleResize(e) {
             setWidthScreen(e.currentTarget.innerWidth);
-            console.log(e.currentTarget.innerWidth);
         }
 
         window.addEventListener('resize', handleResize);
@@ -35,51 +34,60 @@ export const Header = ({ links }) => {
     return (
         <Wrapper>
             <Head>
-                {widthScreen < 768 && (
+                {widthScreen <= 767 && (
                     <Burger onClick={() => setTriggerBurger(!triggerBurger)}>
                         <IoReorderFour size="28px" />
                     </Burger>
                 )}
 
-                {widthScreen > 768 || triggerBurger ? (
-                    <>
-                        <Menu>
-                            {links.map((link) => (
+                {widthScreen > 767 || triggerBurger ? (
+                    <Menu>
+                        {links &&
+                            links[0].list.map((link) => (
                                 <NavLink
-                                    key={`${link.title}`}
+                                    key={`${link.name}`}
                                     className={setActive}
                                     to={`${link.path}`}
                                     onClick={() => setTriggerBurger(false)}>
-                                    <MenuItem>{`${link.title}`}</MenuItem>
+                                    <MenuItem>{`${link.name}`}</MenuItem>
                                 </NavLink>
                             ))}
-                        </Menu>
-                        <SideMenu>
-                            <NavLink
-                                to="/search"
-                                onClick={() => setTriggerBurger(false)}
-                                className={setActive}>
-                                <MenuItem>
-                                    <IoSearchSharp size="20px" />
-                                </MenuItem>
-                            </NavLink>
-                            <MenuItem>
-                                <IoPerson size="20px" />
-                            </MenuItem>
-                            <MenuItem onClick={toggleTheme}>
-                                <ModeSwitcher>
-                                    {theme === 'light' ? (
-                                        <IoMoonOutline size="20px" />
-                                    ) : (
-                                        <IoMoon size="20px" />
-                                    )}
-                                </ModeSwitcher>
-                            </MenuItem>
-                        </SideMenu>
-                    </>
+                        <Slogan>Кино только начинается…</Slogan>
+                        <Social>
+                            {social.map((s) => (
+                                <SocialLink key={`${s.name}`} title={s.name} href={`${s.link}`}>
+                                    <SocialItem>
+                                        {React.createElement(s.сomp, { size: '32px' })}
+                                    </SocialItem>
+                                </SocialLink>
+                            ))}
+                        </Social>{' '}
+                    </Menu>
                 ) : (
                     ''
                 )}
+                <SideMenu>
+                    <NavLink
+                        to="/search"
+                        onClick={() => setTriggerBurger(false)}
+                        className={setActive}>
+                        <MenuItem>
+                            <IoSearchSharp size="20px" />
+                        </MenuItem>
+                    </NavLink>
+                    <MenuItem>
+                        <IoPerson size="20px" />
+                    </MenuItem>
+                    <MenuItem onClick={toggleTheme}>
+                        <ModeSwitcher>
+                            {theme === 'light' ? (
+                                <IoMoonOutline size="20px" />
+                            ) : (
+                                <IoMoon size="20px" />
+                            )}
+                        </ModeSwitcher>
+                    </MenuItem>
+                </SideMenu>
             </Head>
         </Wrapper>
     );
@@ -100,19 +108,20 @@ const Wrapper = styled.div`
 `;
 
 const Head = styled.header`
+    background-color: var(--colors-ui-basebg);
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    @media (min-width: 767px) {
+    @media (min-width: 768px) {
         justify-content: space-between;
         flex-direction: row;
     }
 `;
 
 const Burger = styled.span`
-    color: var(--colors-text);
+    color: #fff;
     background-color: red;
     height: 64px;
     width: 64px;
@@ -122,6 +131,7 @@ const Burger = styled.span`
     left: 0;
     top: 0;
     position: fixed;
+    box-shadow: var(--shadow);
 `;
 
 const Menu = styled.ul`
@@ -129,10 +139,16 @@ const Menu = styled.ul`
     flex-direction: column;
     list-style: none;
     padding: 0;
-    margin: 65px 0 0 0;
-    width: 100%;
-    @media (min-width: 767px) {
+    padding: 86px 0 0 0;
+    width: 100vw;
+    height: 100vh;
+    max-height: auto;
+    overflow: auto;
+
+    @media (min-width: 768px) {
+        height: auto;
         margin: 0;
+        padding-top: 0;
         flex-direction: row;
         align-items: center;
     }
@@ -161,13 +177,20 @@ const MenuItem = styled.li`
 const SideMenu = styled.div`
     display: flex;
     list-style: none;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     cursor: pointer;
-
-    @media (max-width: 767px) {
-        position: absolute;
-        right: 0;
+    background-color: var(--colors-bg);
+    position: absolute;
+    right: 0;
+    left: 64px;
+    box-shadow: var(--shadow);
+    @media (min-width: 768px) {
+        position: relative;
+        box-shadow: none;
+        right: auto;
+        left: auto;
+        background-color: var(--colors-ui-base);
     }
 `;
 
@@ -177,4 +200,43 @@ const ModeSwitcher = styled.div`
     cursor: pointer;
     font-weight: var(--fw-bold);
     text-transform: capitalize;
+`;
+
+const Slogan = styled.span`
+    font-size: var(--fz-md);
+    font-weight: var(--fw-normal);
+    color: var(--colors-text);
+    text-align: center;
+    margin: 3rem 1rem;
+
+    @media (min-width: 768px) {
+        display: none;
+    }
+`;
+const Social = styled.ul`
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0;
+    @media (min-width: 768px) {
+        display: none;
+    }
+`;
+const SocialItem = styled.li`
+    padding: 1rem;
+    @media (min-width: 768px) {
+        display: none;
+    }
+`;
+
+const SocialLink = styled.a`
+    text-decoration: none;
+    color: var(--colors-text);
+    transition: color 0.2s linear;
+
+    &:hover {
+        color: red;
+    }
 `;
