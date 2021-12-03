@@ -1,96 +1,27 @@
 import React from 'react';
 import styled from 'styled-components';
-import {
-    IoLogoFacebook,
-    IoLogoTwitter,
-    IoLogoInstagram,
-    IoLogoYoutube,
-    IoArrowForwardOutline,
-} from 'react-icons/io5';
+import { IoArrowForwardOutline } from 'react-icons/io5';
 import { NavLink } from 'react-router-dom';
 
-const links = [
-    {
-        title: 'Главные',
-        list: [
-            {
-                name: 'Главная',
-                link: '/',
-            },
-            {
-                name: 'Фильмы',
-                link: '/films',
-            },
-            {
-                name: 'О нас',
-                link: '/about',
-            },
-            {
-                name: 'Контакты',
-                link: '/contacts',
-            },
-        ],
-    },
-    {
-        title: 'Подборки',
-        list: [
-            {
-                name: 'Топ ожидаемых',
-                link: '/films/top',
-            },
-            {
-                name: 'Топ 250 лучших',
-                link: '/films/best',
-            },
-            {
-                name: 'Топ 100 популярных',
-                link: '/films/popular',
-            },
-        ],
-    },
-];
-
-const social = [
-    {
-        name: 'Facebook',
-        сomp: IoLogoFacebook,
-        link: '/',
-    },
-    {
-        name: 'Twitter',
-        сomp: IoLogoTwitter,
-        link: '/',
-    },
-    {
-        name: 'Instagram',
-        сomp: IoLogoInstagram,
-        link: '/',
-    },
-    {
-        name: 'Youtube',
-        сomp: IoLogoYoutube,
-        link: '/',
-    },
-];
-
-export const Footer = () => {
+export const Footer = ({ links, social }) => {
     const setActive = ({ isActive }) => (isActive ? 'activeLinkNav' : 'notActiveLinkNav');
     return (
         <Wrap>
             <Nav>
-                {links.map((list, index) => (
-                    <List key={`${list.title}_${index}`}>
-                        <ListTitle>{list.title}</ListTitle>
-                        {list.list.map((link) => (
-                            <NavLink key={`${link.name}`} className={setActive} to={link.link}>
-                                <ListLink>
-                                    <ListItem>{link.name}</ListItem>
-                                    <IoArrowForwardOutline size="12px" />
-                                </ListLink>
-                            </NavLink>
-                        ))}
-                    </List>
-                ))}
+                {links &&
+                    links.map((list, index) => (
+                        <List key={`${list.title}_${index}`}>
+                            <ListTitle>{list.title}</ListTitle>
+                            {list.list.map((link) => (
+                                <NavLink key={`${link.name}`} className={setActive} to={link.path}>
+                                    <ListLink>
+                                        <ListItem>{link.name}</ListItem>
+                                        <IoArrowForwardOutline size="12px" />
+                                    </ListLink>
+                                </NavLink>
+                            ))}
+                        </List>
+                    ))}
             </Nav>
             <About>
                 {/* <Logo></Logo> */}
@@ -99,7 +30,7 @@ export const Footer = () => {
                 <Social>
                     {social.map((s) => (
                         <SocialLink key={`${s.name}`} title={s.name} href={`${s.link}`}>
-                            <SocialItem>{React.createElement(s.сomp, { size: '24px' })}</SocialItem>
+                            <SocialItem>{React.createElement(s.сomp, { size: '32px' })}</SocialItem>
                         </SocialLink>
                     ))}
                 </Social>
