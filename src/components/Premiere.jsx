@@ -1,67 +1,64 @@
 import styled from 'styled-components';
-import React, { useEffect, useState } from 'react';
-
+import React, { useEffect } from 'react';
+import { Loader } from './Loader';
 import { PREMIERE } from '../api/kinopoisk';
-
 import { FilmListSlider } from './FilmListSlider';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchPremiere } from '../store/premierSlice';
 
 export const Premiere = () => {
-    const [filmList, setFilmList] = useState('');
+    const { premiereList, status, error } = useSelector((state) => state.premier);
 
+    const dispatch = useDispatch();
     useEffect(() => {
-        const fetchPremiere = async () => {
-            let response = await fetch(PREMIERE, {
-                method: 'GET',
-                headers: {
-                    'X-API-KEY': 'f876a4a1-43e5-45e4-bbab-4efbf24a5835',
-                    'Content-Type': 'application/json',
-                },
-            });
-            response = await response.json();
-            setFilmList(response);
-        };
-        fetchPremiere();
-    }, []);
+        dispatch(fetchPremiere({ name: PREMIERE }));
+    }, [dispatch]);
 
     return (
         <Wrapper>
-            {filmList && (
-                <FilmListSlider
-                    filmList={filmList.items}
-                    path="films"
-                    title="премьеры"
-                    sliderName="premieres"
-                    spaceBetween={0}
-                    slidesPerGroup={1}
-                    slidesPerView={1}
-                    breaks={{
-                        550: {
-                            spaceBetween: 20,
-                            slidesPerView: 2,
-                            slidesPerGroup: 2,
-                        },
-                        768: {
-                            spaceBetween: 20,
-                            slidesPerView: 3,
-                            slidesPerGroup: 3,
-                        },
-                        1024: {
-                            spaceBetween: 20,
-                            slidesPerView: 4,
-                            slidesPerGroup: 4,
-                        },
-                        1180: {
-                            spaceBetween: 20,
-                            slidesPerView: 5,
-                            slidesPerGroup: 5,
-                        },
-                        1366: {
-                            spaceBetween: 20,
-                            slidesPerView: 6,
-                            slidesPerGroup: 6,
-                        },
-                    }}></FilmListSlider>
+            {status === 'loading' && (
+                <Loader>
+                    <div className="loader"></div>
+                </Loader>
             )}
+
+            <FilmListSlider
+                filmList={premiereList.items}
+                path="films"
+                title="премьеры"
+                sliderName="premieres"
+                spaceBetween={0}
+                slidesPerGroup={1}
+                slidesPerView={1}
+                breaks={{
+                    550: {
+                        spaceBetween: 20,
+                        slidesPerView: 2,
+                        slidesPerGroup: 2,
+                    },
+                    768: {
+                        spaceBetween: 20,
+                        slidesPerView: 3,
+                        slidesPerGroup: 3,
+                    },
+                    1024: {
+                        spaceBetween: 20,
+                        slidesPerView: 4,
+                        slidesPerGroup: 4,
+                    },
+                    1180: {
+                        spaceBetween: 20,
+                        slidesPerView: 5,
+                        slidesPerGroup: 5,
+                    },
+                    1366: {
+                        spaceBetween: 20,
+                        slidesPerView: 6,
+                        slidesPerGroup: 6,
+                    },
+                }}></FilmListSlider>
+
+            {error && error}
         </Wrapper>
     );
 };
