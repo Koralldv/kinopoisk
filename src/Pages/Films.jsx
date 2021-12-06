@@ -6,190 +6,175 @@ import { TOP } from '../api/kinopoisk';
 import { Loader } from '../components/Loader';
 import { FilmListSlider } from '../components/FilmListSlider';
 
-export const Films = () => {
-    const [filmListTop, setFilmListTop] = useState('');
-    const [filmListBest, setFilmListBest] = useState('');
-    const [filmListPopular, setFilmListPopular] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchTop } from '../store/topSlice';
+import { fetchBest } from '../store/bestSlice';
+import { fetchPopular } from '../store/popularSlice';
 
+export const Films = () => {
+    const { topList, status: statusTop, error: errorTop } = useSelector((state) => state.top);
+    const { bestList, status: statusBest, error: errorBest } = useSelector((state) => state.best);
+    const {
+        popularList,
+        status: statusPop,
+        error: errorPop,
+    } = useSelector((state) => state.popular);
+
+    const dispatch = useDispatch();
     useEffect(() => {
-        const fetchTop = async () => {
-            setIsLoading(true);
-            let response = await fetch(TOP('TOP_AWAIT_FILMS', 1), {
-                method: 'GET',
-                headers: {
-                    'X-API-KEY': 'f876a4a1-43e5-45e4-bbab-4efbf24a5835',
-                    'Content-Type': 'application/json',
-                },
-            });
-            response = await response.json();
-            setFilmListTop(response.films);
-            setIsLoading(false);
-        };
-        const fetchBest = async () => {
-            setIsLoading(true);
-            let response = await fetch(TOP('TOP_250_BEST_FILMS', 1), {
-                method: 'GET',
-                headers: {
-                    'X-API-KEY': 'f876a4a1-43e5-45e4-bbab-4efbf24a5835',
-                    'Content-Type': 'application/json',
-                },
-            });
-            response = await response.json();
-            setFilmListBest(response.films);
-            setIsLoading(false);
-        };
-        const fetchPopular = async () => {
-            setIsLoading(true);
-            let response = await fetch(TOP('TOP_100_POPULAR_FILMS', 1), {
-                method: 'GET',
-                headers: {
-                    'X-API-KEY': 'f876a4a1-43e5-45e4-bbab-4efbf24a5835',
-                    'Content-Type': 'application/json',
-                },
-            });
-            response = await response.json();
-            setFilmListPopular(response.films);
-            setIsLoading(false);
-        };
-        fetchTop();
-        fetchBest();
-        fetchPopular();
-    }, []);
+        dispatch(
+            fetchTop({
+                name: TOP('TOP_AWAIT_FILMS', 1),
+            }),
+        );
+        dispatch(
+            fetchBest({
+                name: TOP('TOP_250_BEST_FILMS', 1),
+            }),
+        );
+        dispatch(
+            fetchPopular({
+                name: TOP('TOP_100_POPULAR_FILMS', 1),
+            }),
+        );
+    }, [dispatch]);
 
     return (
         <Wrapper>
             <Title>Лучшие подборки фильмов от Кинопоиска</Title>
-
-            {isLoading && (
+            {statusTop === 'loading' && (
                 <Loader>
                     <div className="loader"></div>
                 </Loader>
             )}
 
-            {!isLoading && (
-                <>
-                    <FilmListSlider
-                        pathAll="/films/top/"
-                        text="посмотреть все фильмы"
-                        filmList={filmListTop}
-                        title="топ ожидаемых"
-                        sliderName="top"
-                        spaceBetween={0}
-                        slidesPerGroup={1}
-                        slidesPerView={1}
-                        path="films"
-                        breaks={{
-                            550: {
-                                spaceBetween: 20,
-                                slidesPerView: 2,
-                                slidesPerGroup: 2,
-                            },
-                            768: {
-                                spaceBetween: 20,
-                                slidesPerView: 3,
-                                slidesPerGroup: 3,
-                            },
-                            1024: {
-                                spaceBetween: 20,
-                                slidesPerView: 4,
-                                slidesPerGroup: 4,
-                            },
-                            1180: {
-                                spaceBetween: 20,
-                                slidesPerView: 5,
-                                slidesPerGroup: 5,
-                            },
-                            1366: {
-                                spaceBetween: 20,
-                                slidesPerView: 6,
-                                slidesPerGroup: 6,
-                            },
-                        }}></FilmListSlider>
-                </>
+            {
+                <FilmListSlider
+                    pathAll="/films/top/"
+                    text="посмотреть все фильмы"
+                    filmList={topList.films}
+                    title="топ ожидаемых"
+                    sliderName="top"
+                    spaceBetween={0}
+                    slidesPerGroup={1}
+                    slidesPerView={1}
+                    path="films"
+                    breaks={{
+                        550: {
+                            spaceBetween: 20,
+                            slidesPerView: 2,
+                            slidesPerGroup: 2,
+                        },
+                        768: {
+                            spaceBetween: 20,
+                            slidesPerView: 3,
+                            slidesPerGroup: 3,
+                        },
+                        1024: {
+                            spaceBetween: 20,
+                            slidesPerView: 4,
+                            slidesPerGroup: 4,
+                        },
+                        1180: {
+                            spaceBetween: 20,
+                            slidesPerView: 5,
+                            slidesPerGroup: 5,
+                        },
+                        1366: {
+                            spaceBetween: 20,
+                            slidesPerView: 6,
+                            slidesPerGroup: 6,
+                        },
+                    }}></FilmListSlider>
+            }
+            {errorTop && errorTop}
+            {statusBest === 'loading' && (
+                <Loader>
+                    <div className="loader"></div>
+                </Loader>
             )}
-            {!isLoading && (
-                <>
-                    <FilmListSlider
-                        pathAll="/films/best/"
-                        text="посмотреть все 250 фильмов"
-                        filmList={filmListBest}
-                        title="топ лучших"
-                        sliderName="top"
-                        spaceBetween={0}
-                        slidesPerGroup={1}
-                        slidesPerView={1}
-                        path="films"
-                        breaks={{
-                            550: {
-                                spaceBetween: 20,
-                                slidesPerView: 2,
-                                slidesPerGroup: 2,
-                            },
-                            768: {
-                                spaceBetween: 20,
-                                slidesPerView: 3,
-                                slidesPerGroup: 3,
-                            },
-                            1024: {
-                                spaceBetween: 20,
-                                slidesPerView: 4,
-                                slidesPerGroup: 4,
-                            },
-                            1180: {
-                                spaceBetween: 20,
-                                slidesPerView: 5,
-                                slidesPerGroup: 5,
-                            },
-                            1366: {
-                                spaceBetween: 20,
-                                slidesPerView: 6,
-                                slidesPerGroup: 6,
-                            },
-                        }}></FilmListSlider>
-                </>
+            <FilmListSlider
+                pathAll="/films/best/"
+                text="посмотреть все 250 фильмов"
+                filmList={bestList.films}
+                title="топ лучших"
+                sliderName="top"
+                spaceBetween={0}
+                slidesPerGroup={1}
+                slidesPerView={1}
+                path="films"
+                breaks={{
+                    550: {
+                        spaceBetween: 20,
+                        slidesPerView: 2,
+                        slidesPerGroup: 2,
+                    },
+                    768: {
+                        spaceBetween: 20,
+                        slidesPerView: 3,
+                        slidesPerGroup: 3,
+                    },
+                    1024: {
+                        spaceBetween: 20,
+                        slidesPerView: 4,
+                        slidesPerGroup: 4,
+                    },
+                    1180: {
+                        spaceBetween: 20,
+                        slidesPerView: 5,
+                        slidesPerGroup: 5,
+                    },
+                    1366: {
+                        spaceBetween: 20,
+                        slidesPerView: 6,
+                        slidesPerGroup: 6,
+                    },
+                }}></FilmListSlider>
+            {errorBest && errorBest}
+
+            {statusPop === 'loading' && (
+                <Loader>
+                    <div className="loader"></div>
+                </Loader>
             )}
-            {!isLoading && (
-                <>
-                    <FilmListSlider
-                        pathAll="/films/popular/"
-                        text="посмотреть все 100 фильмов"
-                        filmList={filmListPopular}
-                        title="топ популярных"
-                        sliderName="top"
-                        spaceBetween={0}
-                        slidesPerGroup={1}
-                        slidesPerView={1}
-                        path="films"
-                        breaks={{
-                            550: {
-                                spaceBetween: 20,
-                                slidesPerView: 2,
-                                slidesPerGroup: 2,
-                            },
-                            768: {
-                                spaceBetween: 20,
-                                slidesPerView: 3,
-                                slidesPerGroup: 3,
-                            },
-                            1024: {
-                                spaceBetween: 20,
-                                slidesPerView: 4,
-                                slidesPerGroup: 4,
-                            },
-                            1180: {
-                                spaceBetween: 20,
-                                slidesPerView: 5,
-                                slidesPerGroup: 5,
-                            },
-                            1366: {
-                                spaceBetween: 20,
-                                slidesPerView: 6,
-                                slidesPerGroup: 6,
-                            },
-                        }}></FilmListSlider>
-                </>
-            )}
+            <FilmListSlider
+                pathAll="/films/popular/"
+                text="посмотреть все 100 фильмов"
+                filmList={popularList.films}
+                title="топ популярных"
+                sliderName="top"
+                spaceBetween={0}
+                slidesPerGroup={1}
+                slidesPerView={1}
+                path="films"
+                breaks={{
+                    550: {
+                        spaceBetween: 20,
+                        slidesPerView: 2,
+                        slidesPerGroup: 2,
+                    },
+                    768: {
+                        spaceBetween: 20,
+                        slidesPerView: 3,
+                        slidesPerGroup: 3,
+                    },
+                    1024: {
+                        spaceBetween: 20,
+                        slidesPerView: 4,
+                        slidesPerGroup: 4,
+                    },
+                    1180: {
+                        spaceBetween: 20,
+                        slidesPerView: 5,
+                        slidesPerGroup: 5,
+                    },
+                    1366: {
+                        spaceBetween: 20,
+                        slidesPerView: 6,
+                        slidesPerGroup: 6,
+                    },
+                }}></FilmListSlider>
+            {errorPop && errorPop}
         </Wrapper>
     );
 };
