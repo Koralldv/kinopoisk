@@ -34,6 +34,7 @@ export const FilmListSlider = ({
                             </FullPageLink>
                         )}
                     </Top>
+
                     <Slider
                         sliderName={sliderName}
                         spaceBetween={spaceBetween}
@@ -41,24 +42,27 @@ export const FilmListSlider = ({
                         slidesPerView={slidesPerView}
                         breaks={breaks}>
                         <CardWrapper>
-                            {filmList.map((item) => (
-                                <SwiperSlide key={item.kinopoiskId || item.filmId}>
-                                    <Card>
-                                        <Cover src={item.posterUrlPreview} />
-                                        <Link
-                                            title={item.nameRu}
-                                            to={`/${path}/${item.kinopoiskId || item.filmId}`}>
-                                            <Title>{item.nameRu}</Title>
-                                        </Link>
-                                        <List>
-                                            <Year>{item.year}</Year>
-                                            {item.genres.map((g, index) => (
-                                                <Genre key={`${g.genre}_${index}`}>{g.genre}</Genre>
-                                            ))}
-                                        </List>
-                                    </Card>
-                                </SwiperSlide>
-                            ))}
+                            {filmList &&
+                                filmList.map((item) => (
+                                    <SwiperSlide key={item.kinopoiskId || item.filmId}>
+                                        <Card>
+                                            <Cover src={item.posterUrlPreview} />
+                                            <Link
+                                                title={item.nameRu}
+                                                to={`/${path}/${item.kinopoiskId || item.filmId}`}>
+                                                <Title>{item.nameRu}</Title>
+                                            </Link>
+                                            <List>
+                                                <Year>{item.year}</Year>
+                                                {item.genres.map((g, index) => (
+                                                    <Genre key={`${g.genre}_${index}`}>
+                                                        {g.genre}
+                                                    </Genre>
+                                                ))}
+                                            </List>
+                                        </Card>
+                                    </SwiperSlide>
+                                ))}
                         </CardWrapper>
                         <PaginationBlock className="swiper-paginations"></PaginationBlock>
                     </Slider>
