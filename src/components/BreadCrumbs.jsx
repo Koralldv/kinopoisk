@@ -10,6 +10,7 @@ export const BreadCrumbs = () => {
     const filmsMatches = useMatch('/films');
     const aboutMatches = useMatch('/about');
     const showsMatches = useMatch('/shows');
+    const cabinetMatches = useMatch('/cabinet');
     const notFoundMatches = useMatch('*/*');
     const contactsMatches = useMatch('/contacts');
     const searchMatches = useMatch('/search');
@@ -48,14 +49,13 @@ export const BreadCrumbs = () => {
                 <Breadcrumbs>
                     <Button onClick={() => navigate(-1)}>Назад</Button>
                     <LinkItem to="/">Главная</LinkItem>
-
                     {notFoundMatches !== null ? <PageName>Не найдено</PageName> : ''}
                     {aboutMatches && <PageName>О нас</PageName>}
                     {showsMatches && <PageName>Шоу</PageName>}
                     {filmsMatches && <PageName>Фильмы</PageName>}
                     {contactsMatches && <PageName>Конткты</PageName>}
                     {searchMatches && <PageName>Поиск фильмов</PageName>}
-
+                    {cabinetMatches && <PageName>Кабинет</PageName>}
                     {filmMatches && (
                         <>
                             <LinkItem to="/films">Фильмы</LinkItem>
