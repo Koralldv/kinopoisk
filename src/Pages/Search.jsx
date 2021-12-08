@@ -95,6 +95,7 @@ export const Search = () => {
                     onChange={(event) => setWord(event.target.value)}
                     name="searchInp"
                     value={word}
+                    placeholder="название фильма"
                 />
                 <Button type="submit" isSucces disabled={isLoading}>
                     Искать
