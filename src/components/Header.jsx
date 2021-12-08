@@ -75,9 +75,11 @@ export const Header = ({ links, social }) => {
                             <IoSearchSharp size="20px" />
                         </MenuItem>
                     </NavLink>
-                    <MenuItem>
-                        <IoPerson size="20px" />
-                    </MenuItem>
+                    <NavLink to="/cabinet" className={setActive}>
+                        <MenuItem>
+                            <IoPerson size="20px" />
+                        </MenuItem>
+                    </NavLink>
                     <MenuItem onClick={toggleTheme}>
                         <ModeSwitcher>
                             {theme === 'light' ? (
