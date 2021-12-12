@@ -9,6 +9,7 @@ import {Search} from './Pages/Search'
 import {Films} from './Pages/Films'
 import {Film} from './Pages/Film'
 import {Categories} from './Pages/Categories'
+import {Cabinet} from './Pages/Cabinet'
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
           <Route path='about' element={<About/>} />
           <Route path='contacts' element={<Contact/>} />
           <Route path='films' element={<Films/>}/>
+          <Route path='Cabinet' element={<Cabinet/>}/>
           <Route path='films/:filmId' element={<Film/>}/>
           <Route path='films/top/' element={<Categories/>}/>
           <Route path='films/best/' element={<Categories/>}/>
