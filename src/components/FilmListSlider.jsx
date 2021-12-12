@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import { Slider } from './Slider';
 import { SwiperSlide } from 'swiper/react';
 import { Button } from './Button';
 
-import { IoArrowForwardOutline } from 'react-icons/io5';
+import { IoArrowForwardOutline, IoHeartSharp } from 'react-icons/io5';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { addFilm } from '../store/likeSlice';
 
 import { Link } from 'react-router-dom';
 export const FilmListSlider = ({
@@ -20,6 +23,14 @@ export const FilmListSlider = ({
     pathAll,
     text,
 }) => {
+    const dispatch = useDispatch();
+    const [isLike, setIsLike] = useState([]);
+    const { likeList } = useSelector((state) => state.like);
+
+    const handleLike = (id) => {
+        dispatch(addFilm(id));
+    };
+
     return (
         <>
             {filmList && (
@@ -60,6 +71,19 @@ export const FilmListSlider = ({
                                                     </Genre>
                                                 ))}
                                             </List>
+                                            <Like
+                                                className={
+                                                    likeList.includes(
+                                                        item.kinopoiskId || item.filmId,
+                                                    )
+                                                        ? 'active'
+                                                        : ''
+                                                }
+                                                onClick={() =>
+                                                    handleLike(item.kinopoiskId || item.filmId)
+                                                }>
+                                                <IoHeartSharp size="20px" />
+                                            </Like>
                                         </Card>
                                     </SwiperSlide>
                                 ))}
@@ -167,4 +191,16 @@ const Genre = styled.li`
 const PaginationBlock = styled.div`
     text-align: center;
     margin-bottom: 4rem;
+`;
+
+const Like = styled.div`
+    position: absolute;
+    top: 3rem;
+    right: 1rem;
+    color: #eee;
+    cursor: pointer;
+
+    &.active {
+        color: red;
+    }
 `;
