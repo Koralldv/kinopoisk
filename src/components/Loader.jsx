@@ -4,7 +4,7 @@ export const Loader = styled.div`
     margin-top: 100px;
     & .loader {
         display: block;
-        position: relative;
+        position: fixed;
         left: 50%;
         top: 50%;
         width: 150px;
