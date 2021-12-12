@@ -7,6 +7,9 @@ import { SINGLE_FILM, FRAMES } from '../api/kinopoisk';
 import { Slider } from '../components/Slider';
 import { Loader } from '../components/Loader';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { addFilm } from '../store/likeSlice';
+
 import {
     IoPersonSharp,
     IoTimeOutline,
@@ -15,6 +18,7 @@ import {
     IoPlanetOutline,
     IoStar,
     IoFilmOutline,
+    IoHeartSharp,
 } from 'react-icons/io5';
 
 import { SwiperSlide } from 'swiper/react';
@@ -31,6 +35,14 @@ export const Film = () => {
     const [film, setFilm] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [frames, setFrames] = useState(null);
+
+    const dispatch = useDispatch();
+    const [isLike, setIsLike] = useState([]);
+    const { likeList } = useSelector((state) => state.like);
+
+    const handleLike = (id) => {
+        dispatch(addFilm(id));
+    };
 
     useEffect(() => {
         setIsLoading(true);
@@ -122,6 +134,15 @@ export const Film = () => {
                                     </Star>
                                     <Kinopoinsk>Рейтинг кинопоиска</Kinopoinsk>
                                 </Rating>
+                                <Like
+                                    className={
+                                        likeList.includes(film.kinopoiskId || film.filmId)
+                                            ? 'active'
+                                            : ''
+                                    }
+                                    onClick={() => handleLike(film.kinopoiskId || film.filmId)}>
+                                    <IoHeartSharp size="20px" />
+                                </Like>
                                 <KinoLink
                                     href={`https://www.kinopoisk.ru/film/${filmId}`}
                                     target="_blank">
@@ -323,4 +344,19 @@ const IconWrap = styled.span`
     display: flex;
     justify-content: center;
     padding-right: 0.5rem;
+`;
+
+const Like = styled.div`
+    background-color: var(--colors-ui-base);
+    box-shadow: var(--shadow);
+    border-radius: var(--radii);
+    padding: 1rem;
+    margin: 0 0 1rem 0;
+    width: min-content;
+    color: #eee;
+    cursor: pointer;
+
+    &.active {
+        color: red;
+    }
 `;
