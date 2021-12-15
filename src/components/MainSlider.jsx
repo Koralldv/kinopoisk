@@ -58,11 +58,10 @@ export const MainSlider = () => {
                                             {Math.floor(item.duration / 60)}ч {item.duration % 60}м
                                         </Duration>
                                         {item.genres.map((listItem, index) => (
-                                            <>
-                                                <Genre key={`${listItem.genre}_${index}`}>
-                                                    {listItem.genre}
-                                                </Genre>
-                                            </>
+                                            <Genre
+                                                key={`${item.kinopoiskId || item.filmId}_${index}`}>
+                                                {listItem.genre}
+                                            </Genre>
                                         ))}
                                     </Digits>
                                     <Buttons>
