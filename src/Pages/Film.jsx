@@ -37,7 +37,6 @@ export const Film = () => {
     const [frames, setFrames] = useState(null);
 
     const dispatch = useDispatch();
-    const [isLike, setIsLike] = useState([]);
     const { likeList } = useSelector((state) => state.like);
 
     const handleLike = (id) => {
@@ -173,11 +172,12 @@ export const Film = () => {
                                             slidesPerGroup: 3,
                                         },
                                     }}>
-                                    {frames.frames.map((f) => (
-                                        <SwiperSlide key={`${f.preview}`}>
-                                            <ImgSlide src={f.preview} />
-                                        </SwiperSlide>
-                                    ))}
+                                    {frames &&
+                                        frames.frames.map((f) => (
+                                            <SwiperSlide key={`${f.preview}`}>
+                                                <ImgSlide src={f.preview} />
+                                            </SwiperSlide>
+                                        ))}
                                     <PaginationBlock className="swiper-paginations"></PaginationBlock>
                                 </Slider>
                             </SliderWrap>
