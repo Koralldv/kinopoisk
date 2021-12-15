@@ -206,18 +206,15 @@ const About = styled.div`
 
 const Badges = styled.div`
     display: flex;
-    flex-direction: column;
-    margin: 0 0 1rem 0;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 1rem 0;
+    width: 100%;
 
-    @media (max-width: 1425px) {
-        margin: 1rem 0;
-        width: 100%;
-        flex-direction: row;
-        align-items: center;
+    @media (min-width: 768px) {
+        margin: 0 0 1rem 0;
+        width: 214px;
         justify-content: flex-start;
-    }
-    @media (max-width: 768px) {
-        justify-content: space-between;
     }
 `;
 
@@ -292,7 +289,7 @@ const Rating = styled.div`
     max-width: 130px;
     margin: 0 1rem 1rem 0;
     @media (max-width: 768px) {
-        margin: 0 1rem 0 0;
+        margin: 0 1rem 1rem 0;
     }
 `;
 
@@ -330,7 +327,6 @@ const SliderWrap = styled.div`
 `;
 
 const ImgSlide = styled.img`
-    // max-width: 300px;
     width: 100%;
     height: 220px;
 `;
@@ -350,7 +346,8 @@ const Like = styled.div`
     box-shadow: var(--shadow);
     border-radius: var(--radii);
     padding: 1rem;
-    margin: 0 0 1rem 0;
+    height: 52px;
+    margin: 0 1rem 1rem 0;
     width: min-content;
     color: #eee;
     cursor: pointer;
@@ -358,4 +355,7 @@ const Like = styled.div`
     &.active {
         color: red;
     }
+
+    @media (min-width: 768px) {
+        margin: 0 0 1rem 0;
 `;
