@@ -3,7 +3,10 @@ import React, { useState, useEffect } from 'react';
 import { IoSearchSharp, IoMoon, IoMoonOutline, IoPerson, IoReorderFour } from 'react-icons/io5';
 import { NavLink } from 'react-router-dom';
 
+import { useSelector } from 'react-redux';
+
 export const Header = ({ links, social }) => {
+    const { likeList } = useSelector((state) => state.like);
     const [theme, setTheme] = useState('light');
 
     const toggleTheme = () => {
@@ -75,9 +78,10 @@ export const Header = ({ links, social }) => {
                             <IoSearchSharp size="20px" />
                         </MenuItem>
                     </NavLink>
-                    <NavLink to="/cabinet" className={setActive}>
+                    <NavLink to="/cabinet" className={setActive} style={{ position: 'relative' }}>
                         <MenuItem>
                             <IoPerson size="20px" />
+                            <TotalLike>{likeList.length > 0 && likeList.length}</TotalLike>
                         </MenuItem>
                     </NavLink>
                     <MenuItem onClick={toggleTheme}>
@@ -241,4 +245,12 @@ const SocialLink = styled.a`
     &:hover {
         color: red;
     }
+`;
+
+const TotalLike = styled.span`
+    font-size: var(--fz-sm);
+    font-weight: var(--fw-bold);
+    position: absolute;
+    top: 15px;
+    right: 15px;
 `;
