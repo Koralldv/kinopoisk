@@ -12,6 +12,7 @@ export const Button = ({
     isDelete,
     disabled,
     isSucces,
+    iconColor,
 }) => {
     return (
         <Btn
@@ -23,7 +24,7 @@ export const Button = ({
             onClick={onClick}
             disabled={disabled}>
             {icon && (
-                <Icon padding={padding} icon>
+                <Icon padding={padding} icon iconColor={iconColor}>
                     {React.createElement(icon, { size: '18px' })}
                 </Icon>
             )}
@@ -59,4 +60,5 @@ const Icon = styled.i`
     display: flex;
     margin-left: ${(props) => (props.padding && props.padding === 'left' ? '.5rem' : '0')};
     margin-right: ${(props) => (props.padding && props.padding === 'right' ? '.5rem' : '0')};
+    color: ${(props) => (props.iconColor ? props.iconColor : '')};
 `;
