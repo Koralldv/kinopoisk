@@ -71,9 +71,9 @@ export const Cabinet = () => {
 };
 
 const Wrapper = styled.div`
-    margin: 56px 1.5rem 2rem 1.5rem;
+    margin: 56px 1.5rem 2rem;
     @media (min-width: 425px) {
-        margin: 56px 3rem 2rem 3rem;
+        margin: 56px 0 2rem 2rem;
     }
 `;
 
@@ -89,19 +89,35 @@ const Title = styled.h3`
 
 const LikedFilmList = styled.div`
     display: flex;
-    justify-content: flex-start;
-    flex-wrap: wrap;
+    align-items: center;
+    flex-direction: column;
+    @media (min-width: 768px) {
+        flex-direction: row;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        align-items: flex-start;
+    }
 `;
 
 const LikedFilm = styled.div`
     position: relative;
     display: flex;
-    width: 31%;
-    margin: 0 2rem 2rem 0;
-    padding: 1rem 2rem;
+    flex-direction: column;
+    width: 100%;
+    margin: 0 0 2rem 0;
     background-color: var(--colors-ui-base);
     border-radius: var(--radii);
     box-shadow: var(--shadow);
+
+    @media (min-width: 415px) {
+        max-width: 300px;
+    }
+
+    @media (min-width: 768px) {
+        margin: 0 2rem 2rem 0;
+        width: 222px;
+        height: 470px;
+    }
 `;
 
 const Icon = styled.i`
@@ -113,24 +129,44 @@ const Info = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    padding: 1rem;
 `;
 
 const Image = styled.img`
     width: auto;
-    height: 150px;
-    margin: 0 1rem 0 0;
+    height: auto;
+    margin: 0 0 0 0;
+    object-fit: contain;
+    @media (min-width: 768px) {
+        width: 100%;
+        height: 320px;
+        object-fit: cover;
+        margin: 0 auto:
+    }
 `;
 
 const Name = styled.h3`
     margin: 0;
     padding: 0;
+    font-size: var(--fz-sm);
+    font-weight: var(--fw-bold);
 `;
 
 const Close = styled.i`
     margin: 0;
     padding: 0;
     position: absolute;
-    top: 1rem;
-    right: 1rem;
+    top: 0.5rem;
+    right: 0.5rem;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 25px;
+    width: 25px;
     cursor: pointer;
+    box-shadow: var(--shadow);
+    border-radius: 100px;
+    line-height: 0;
+    background-color: var(--colors-ui-base);
 `;
