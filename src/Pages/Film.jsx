@@ -58,7 +58,6 @@ export const Film = () => {
             response = await response.json();
             setFilm(response);
             setIsLoading(false);
-            console.log(response);
         };
 
         const fetchFramesFilm = async () => {
