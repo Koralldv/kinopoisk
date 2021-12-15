@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 import { Slider } from './Slider';
@@ -24,7 +24,6 @@ export const FilmListSlider = ({
     text,
 }) => {
     const dispatch = useDispatch();
-    const [isLike, setIsLike] = useState([]);
     const { likeList } = useSelector((state) => state.like);
 
     const handleLike = (id) => {
