@@ -1,11 +1,19 @@
 import styled from 'styled-components';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 import { Slider } from './Slider';
+import { PREMIERE } from '../api/kinopoisk';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchPremiere } from '../store/premierSlice';
+import { addFilm } from '../store/likeSlice';
+
+import { Loader } from './Loader';
 import { SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation } from 'swiper/core';
 import { IoArrowForwardOutline, IoHeart } from 'react-icons/io5';
+
 import 'swiper/swiper-bundle.min.css';
 import 'swiper/swiper.min.css';
 
@@ -14,37 +22,76 @@ import { Button } from './Button';
 SwiperCore.use([Navigation]);
 
 export const MainSlider = () => {
-    return (
-        <Slider sliderName="main" spaceBetween={0} slidesPerGroup={1} slidesPerView={1}>
-            {filmsSlider.map((item, index) => (
-                <SwiperSlide key={`${item.title}_${index}`}>
-                    <Img src={item.img} />
-                    <Wrapper>
-                        <RgbaBg />
-                        <Film>
-                            <FilmTitle>{item.title}</FilmTitle>
+    const { premiereList, status, error } = useSelector((state) => state.premier);
 
-                            {item.list.map((listItem, index) => (
-                                <Digits key={`${listItem}_${index}`}>
-                                    <Year>{listItem.year}</Year>
-                                    <Age>{listItem.age} +</Age>
-                                    <Duration>{listItem.duration}</Duration>
-                                </Digits>
-                            ))}
-                            <Desc>{item.desc}</Desc>
-                            <Buttons>
-                                <Button icon={IoArrowForwardOutline} padding="left">
-                                    Смотреть
-                                </Button>
-                                <Button icon={IoHeart} padding="right">
-                                    В избранное
-                                </Button>
-                            </Buttons>
-                        </Film>
-                    </Wrapper>
-                </SwiperSlide>
-            ))}
-        </Slider>
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(fetchPremiere({ name: PREMIERE }));
+    }, [dispatch]);
+
+    const { likeList } = useSelector((state) => state.like);
+
+    const handleLike = (id) => {
+        dispatch(addFilm(id));
+    };
+    return (
+        <>
+            {status === 'loading' && (
+                <Loader>
+                    <div className="loader"></div>
+                </Loader>
+            )}
+
+            <Slider sliderName="main" spaceBetween={0} slidesPerGroup={1} slidesPerView={1}>
+                {premiereList.items &&
+                    premiereList.items.map((item, index) => (
+                        <SwiperSlide key={`${item.nameRu}_${index}`}>
+                            <Img src={item.posterUrl} />
+                            <Wrapper>
+                                <RgbaBg />
+                                <Film>
+                                    <FilmTitle>{item.nameRu}</FilmTitle>
+                                    <Digits>
+                                        <Year>{item.year}</Year>
+                                        <Duration>
+                                            {Math.floor(item.duration / 60)}ч {item.duration % 60}м
+                                        </Duration>
+                                        {item.genres.map((listItem, index) => (
+                                            <>
+                                                <Genre key={`${listItem.genre}_${index}`}>
+                                                    {listItem.genre}
+                                                </Genre>
+                                            </>
+                                        ))}
+                                    </Digits>
+                                    <Buttons>
+                                        <Link to={`/films/${item.kinopoiskId || item.filmId}`}>
+                                            <Button icon={IoArrowForwardOutline} padding="left">
+                                                Смотреть
+                                            </Button>
+                                        </Link>
+                                        <Button
+                                            icon={IoHeart}
+                                            iconColor={
+                                                likeList.includes(item.kinopoiskId || item.filmId)
+                                                    ? 'red'
+                                                    : ''
+                                            }
+                                            padding="right"
+                                            onClick={() =>
+                                                handleLike(item.kinopoiskId || item.filmId)
+                                            }>
+                                            В избранное
+                                        </Button>
+                                    </Buttons>
+                                </Film>
+                            </Wrapper>
+                        </SwiperSlide>
+                    ))}
+            </Slider>
+            {error && error}
+        </>
     );
 };
 
@@ -71,7 +118,7 @@ const RgbaBg = styled.div`
     z-index: -1;
     backdrop-filter: blur(50px);
     width: 40%;
-    @media (max-width: 725px) {
+    @media (max-width: 768px) {
         display: none;
     }
 `;
@@ -82,6 +129,11 @@ const Img = styled.img`
     height: 100%;
     position: absolute;
     z-index: 0;
+    right: 0;
+    top: 64px;
+    @media (min-width: 768px) {
+        width: 65%;
+    }
 `;
 
 const Film = styled.div`
@@ -90,69 +142,83 @@ const Film = styled.div`
 `;
 
 const FilmTitle = styled.h1`
-    font-size: var(--fz-xxl);
+    font-size: var(--fz-xl);
     font-weight: var(--fw-bold);
     margin: 0;
+    background-color: var(--colors-ui-base);
+    padding: 0.5rem 1rem;
+    border-radius: var(--radii);
+    box-shadow: var(--shadow);
+
+    @media (min-width: 550px) {
+    }
+
+    @media (min-width: 768px) {
+        font-size: var(--fz-xxl);
+        background-color: transparent;
+        border-radius: none;
+        box-shadow: none;
+    }
 `;
 
 const Digits = styled.div`
-    margin: 1rem 0;
+    margin: 0 0 1rem;
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
 `;
 
 const Year = styled.span`
-    margin-right: 1rem;
+    margin: 1rem 1rem 0 0;
     color: var(--colors-text);
     font-weight: var(--fw-normal);
     font-size: var(--fz-md);
+    background-color: var(--colors-ui-base);
+    padding: 0.5rem 1rem;
+    border-radius: var(--radii);
+    box-shadow: var(--shadow);
+    @media (min-width: 768px) {
+        background-color: transparent;
+        border-radius: none;
+        box-shadow: none;
+    }
 `;
 
-const Age = styled.span`
-    margin-right: 1rem;
+const Genre = styled.span`
+    margin: 1rem 1rem 0 0;
     color: var(--colors-text);
     font-weight: var(--fw-normal);
     font-size: var(--fz-md);
     border: 2px solid red;
-    padding: 5px 10px;
+    padding: 0.5rem 1rem;
     border-radius: 50px;
+    background-color: var(--colors-ui-base);
+    box-shadow: var(--shadow);
+    @media (min-width: 768px) {
+        background-color: transparent;
+        border-radius: none;
+        box-shadow: none;
+    }
 `;
 
 const Duration = styled.span`
-    margin-right: 1rem;
+    margin: 1rem 1rem 0 0;
     color: var(--colors-text);
     font-weight: var(--fw-normal);
     font-size: var(--fz-md);
-`;
+    background-color: var(--colors-ui-base);
+    padding: 0.5rem 1rem;
+    border-radius: var(--radii);
+    box-shadow: var(--shadow);
 
-const Desc = styled.p`
-    margin: 0 0 1rem 0;
-    color: var(--colors-text);
-    font-weight: var(--fw-normal);
+    @media (min-width: 768px) {
+        background-color: transparent;
+        border-radius: none;
+        box-shadow: none;
+    }
 `;
 
 const Buttons = styled.div`
     display: flex;
     flex-wrap: wrap;
 `;
-
-const filmsSlider = [
-    {
-        title: 'THE EARTH',
-        desc: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptate harum aperiam labore! Commodi officia ipsam libero possimus.',
-        img: 'https://www.film.ru/sites/default/files/images/49435960-1135677.jpg',
-        list: [{ year: '2021', age: '18', duration: '2h 6m' }],
-    },
-    {
-        title: 'THE EARTH 2',
-        desc: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptate harum aperiam labore! Commodi officia ipsam libero possimus.',
-        img: 'https://www.film.ru/sites/default/files/images/49435960-1135677.jpg',
-        list: [{ year: '2021', age: '18', duration: '2h 6m' }],
-    },
-    {
-        title: 'THE EARTH 3',
-        desc: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptate harum aperiam labore! Commodi officia ipsam libero possimus.',
-        img: 'https://www.film.ru/sites/default/files/images/49435960-1135677.jpg',
-        list: [{ year: '2021', age: '18', duration: '2h 6m' }],
-    },
-];
