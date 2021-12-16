@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import { useMatch, useSearchParams } from 'react-router-dom';
@@ -13,7 +13,6 @@ export const Categories = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const searchQuery = searchParams.get('keyword') || '';
     const pageQuery = searchParams.get('page') || 1;
-
     const matches = {};
     matches.top = useMatch('/films/top');
     matches.best = useMatch('/films/best');
@@ -25,7 +24,7 @@ export const Categories = () => {
     const [films, setFilms] = useState(null);
     const [word, setWord] = useState(null);
 
-    useMemo(() => {
+    useEffect(() => {
         if (matches.top) {
             setWord('TOP_AWAIT_FILMS');
         } else if (matches.best) {
