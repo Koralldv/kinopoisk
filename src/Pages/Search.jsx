@@ -63,7 +63,7 @@ export const Search = () => {
 
         if (word) {
             params.keyword = e.target.searchInp.value;
-            setSearchParams({ keyword: params.keyword, page: pageQuery });
+            setSearchParams({ keyword: params.keyword, page: 1 });
             setSearch(!search);
         } else if (!word) {
             setError('Впишите название фильма');
