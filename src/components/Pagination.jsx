@@ -20,8 +20,8 @@ export const Pagination = ({
                 pagesArray.map((p, index) => (
                     <Button
                         key={p}
-                        isActive={activePage == index + 1 ? 'active' : ''}
-                        isDelete={activePage == index + 1 ? true : false}
+                        isActive={+activePage === index + 1 ? 'active' : ''}
+                        isDelete={+activePage === index + 1 ? true : false}
                         onClick={() => handlePag(index)}
                         margin=".5rem">
                         {p}
