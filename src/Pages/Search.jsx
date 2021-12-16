@@ -16,12 +16,12 @@ export const Search = () => {
 
     const [word, setWord] = useState('');
     const [activePage, setActivePage] = useState(null);
-    const [totalPages, setTotalPages] = useState(null);
     const [films, setFilms] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [search, setSearch] = useState(false);
     const [error, setError] = useState('');
     const [pagesArray, setPagesArray] = useState(null);
+    const [searchFilmsCountResult, setSearchFilmsCountResult] = useState(null);
 
     useEffect(() => {
         const fetchByKeyword = async () => {
@@ -35,8 +35,8 @@ export const Search = () => {
             });
             response = await response.json();
             setFilms(response.films);
+            setSearchFilmsCountResult(response.searchFilmsCountResult);
             setActivePage(pageQuery);
-            setTotalPages(response.pagesCount);
             setPagesArray(getPagesArray(response.pagesCount));
             setIsLoading(false);
         };
@@ -45,22 +45,21 @@ export const Search = () => {
     }, [search, activePage]);
 
     useEffect(() => {
-        if (totalPages === 0 && word) {
+        if (searchFilmsCountResult === 0 && word) {
             setError('Ничего не найдено');
         }
-        if (totalPages !== 0 && totalPages !== null) {
+        if (searchFilmsCountResult !== 0 && searchFilmsCountResult !== null) {
             setError('');
         }
-        if (totalPages !== 0 && totalPages !== null && !word) {
+        if (searchFilmsCountResult !== 0 && searchFilmsCountResult !== null && !word) {
             setWord(searchQuery);
         }
-    }, [search, totalPages]);
+    }, [search, searchFilmsCountResult]);
 
     const params = {};
 
     const findFilm = (e) => {
         e.preventDefault();
-
         if (word) {
             params.keyword = e.target.searchInp.value;
             setSearchParams({ keyword: params.keyword, page: 1 });
@@ -70,17 +69,18 @@ export const Search = () => {
             setSearchParams('');
             setFilms([]);
             setPagesArray(null);
+            setSearchFilmsCountResult(null);
         }
     };
 
     const Clean = () => {
-        setTotalPages(null);
         setFilms([]);
         setSearchParams('');
         setWord('');
         setPagesArray(null);
         setError('');
         setActivePage(null);
+        setSearchFilmsCountResult(null);
     };
 
     return (
@@ -92,7 +92,7 @@ export const Search = () => {
                         : `Искать фильм по названию :`}
                 </Title>
                 <Input
-                    onChange={(event) => setWord(event.target.value)}
+                    onChange={(event) => setWord(String(event.target.value))}
                     name="searchInp"
                     value={word}
                     placeholder="название фильма"
