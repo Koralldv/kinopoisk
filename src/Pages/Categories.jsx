@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import styled from 'styled-components';
 
 import { useMatch, useSearchParams } from 'react-router-dom';
@@ -25,7 +25,7 @@ export const Categories = () => {
     const [films, setFilms] = useState(null);
     const [word, setWord] = useState(null);
 
-    useEffect(() => {
+    useMemo(() => {
         if (matches.top) {
             setWord('TOP_AWAIT_FILMS');
         } else if (matches.best) {
@@ -33,7 +33,7 @@ export const Categories = () => {
         } else if (matches.popular) {
             setWord('TOP_250_BEST_FILMS');
         }
-    }, [matches]);
+    }, [matches.top, matches.best, matches.popular]);
 
     useEffect(() => {
         const fetchTop = async () => {
@@ -77,17 +77,31 @@ export const Categories = () => {
 const Wrapper = styled.div`
     margin: 1rem;
 
-    @media (min-width: 768px) {
+    @media (min-width: 425px) {
         margin: 2rem;
     }
 `;
 
 const CardWrapper = styled.div`
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
 
-    @media (min-width: 532px) {
+    @media (min-width: 596px) {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: flex-start;
+    }
+
+    @media (min-width: 768px) {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    @media (min-width: 1112px) {
+        width: fit-content;
         justify-content: space-between;
     }
 `;
