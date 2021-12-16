@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { IoArrowForwardOutline } from 'react-icons/io5';
 import { NavLink } from 'react-router-dom';
-import logos from '../img/logo.png';
+import logo from '../img/logo.png';
 
 export const Footer = ({ links, social }) => {
     const setActive = ({ isActive }) => (isActive ? 'activeLinkNav' : 'notActiveLinkNav');
@@ -28,7 +28,7 @@ export const Footer = ({ links, social }) => {
             </Nav>
             <About>
                 <LogoWrap>
-                    <Logo src={logos} />
+                    <Logo src={logo} />
                 </LogoWrap>
                 <Slogan>KINODOMA</Slogan>
                 <Social>
@@ -65,6 +65,9 @@ const Wrap = styled.footer`
 
 const Nav = styled.div`
     display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 320px;
 `;
 
 const About = styled.div`
@@ -105,11 +108,8 @@ const SocialItem = styled.li`
 `;
 const List = styled.ul`
     list-style: none;
-    margin: 0 1rem 0 0;
+    margin: 0;
     padding: 0;
-    @media (max-width: 456px) {
-        margin-bottom: 1rem;
-    }
 `;
 
 const Icon = styled.i`
@@ -127,7 +127,7 @@ const ListTitle = styled.span`
 const ListItem = styled.li`
     font-size: var(--fz-md);
     font-weight: var(--fw-normal);
-    margin: 0 0.5rem 0.2rem 0;
+    margin: 0 0.5rem 0 0;
 `;
 
 const SocialLink = styled.a`
@@ -146,6 +146,7 @@ const ListLink = styled.span`
     display: flex;
     align-items: center;
     width: max-content;
+    margin-bottom: 0.2rem;
 
     &:hover {
         color: red;
