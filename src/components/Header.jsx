@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { IoSearchSharp, IoMoon, IoMoonOutline, IoPerson, IoReorderFour } from 'react-icons/io5';
 import { NavLink } from 'react-router-dom';
 
+import logo from '../img/logo.png';
 import { useSelector } from 'react-redux';
 
 export const Header = ({ links, social }) => {
@@ -55,7 +56,10 @@ export const Header = ({ links, social }) => {
                                     <MenuItem>{`${link.name}`}</MenuItem>
                                 </NavLink>
                             ))}
-                        <Slogan>Кино только начинается…</Slogan>
+                        <LogoWrap>
+                            <Logo src={logo} />
+                        </LogoWrap>
+                        <Slogan>KINODOMA</Slogan>
                         <Social>
                             {social.map((s) => (
                                 <SocialLink key={`${s.name}`} title={s.name} href={`${s.link}`}>
@@ -208,12 +212,26 @@ const ModeSwitcher = styled.div`
     text-transform: capitalize;
 `;
 
+const LogoWrap = styled.div`
+    width: 64px;
+    height: 64px;
+    margin: 1rem auto 0;
+
+    @media (min-width: 768px) {
+        display: none;
+    }
+`;
+
+const Logo = styled.img`
+    width: 100%;
+`;
+
 const Slogan = styled.span`
-    font-size: var(--fz-md);
-    font-weight: var(--fw-normal);
+    font-size: var(--fz-xl);
+    font-weight: var(--fw-bold);
     color: var(--colors-text);
     text-align: center;
-    margin: 3rem 1rem;
+    margin: 0.5rem auto 1rem;
 
     @media (min-width: 768px) {
         display: none;
