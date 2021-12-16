@@ -64,7 +64,7 @@ export const BreadCrumbs = () => {
                     )}
                     {topMatches && <PageName>Топ ожидаемых</PageName>}
                     {bestMatches && <PageName>Топ 250 лучших</PageName>}
-                    {popularMatches && <PageName>Топ 100 самых популярных</PageName>}
+                    {popularMatches && <PageName>Топ 100 популярных</PageName>}
                 </Breadcrumbs>
             )}
         </>
