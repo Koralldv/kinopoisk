@@ -190,9 +190,9 @@ export const Film = () => {
 };
 
 const Wrapper = styled.div`
-    margin: 56px 3rem 2rem 3rem;
-    @media (max-width: 425px) {
-        margin: 56px 1.5rem 2rem 1.5rem;
+    margin: 56px 1rem 2rem;
+    @media (min-width: 425px) {
+        margin: 56px 2rem 2rem;
     }
 `;
 
