@@ -145,7 +145,7 @@ const FilmTitle = styled.h1`
     font-weight: var(--fw-bold);
     margin: 0;
     background-color: var(--colors-ui-base);
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 0;
     border-radius: var(--radii);
     box-shadow: var(--shadow);
 
