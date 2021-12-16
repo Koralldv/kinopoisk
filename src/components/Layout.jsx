@@ -11,7 +11,7 @@ const links = [
         title: 'Главные',
         list: [
             {
-                name: 'Главная',
+                name: 'KINODOMA',
                 path: '/',
             },
             {
@@ -40,7 +40,7 @@ const links = [
                 path: '/films/best',
             },
             {
-                name: 'Топ 100 популярных',
+                name: 'Топ популярных',
                 path: '/films/popular',
             },
         ],
