@@ -6,36 +6,66 @@ export const FilmCardsList = ({ films }) => {
         <>
             {films &&
                 films.map((f) => (
-                    <div key={f.filmId}>
-                        <Card>
-                            <Cover src={f.posterUrlPreview} />
-                            <Link title={f.nameRu} to={`/films/${f.filmId}`}>
-                                <CardTitle>{f.nameRu}</CardTitle>
-                            </Link>
-                            <List>
-                                <Year>год: {f.year}</Year>
-                                <GenreWrapper>
-                                    {f.genres.map((g, index) => (
-                                        <Genre key={`${g.genre}_${index}`}>{g.genre}</Genre>
-                                    ))}
-                                </GenreWrapper>
-                            </List>
-                        </Card>
-                        <br></br>
-                    </div>
+                    <Card key={f.filmId} films={films}>
+                        <Cover src={f.posterUrlPreview} />
+                        <Link title={f.nameRu} to={`/films/${f.filmId}`}>
+                            <CardTitle>{f.nameRu}</CardTitle>
+                        </Link>
+                        <List>
+                            <Year>год: {f.year}</Year>
+                            <GenreWrapper>
+                                {f.genres.map((g, index) => (
+                                    <Genre key={`${g.genre}_${index}`}>{g.genre}</Genre>
+                                ))}
+                            </GenreWrapper>
+                        </List>
+                    </Card>
                 ))}
         </>
     );
 };
 
 const Card = styled.div`
-    // width: 100%;
     width: 250px;
-    // height: 420px;
     margin: 1rem 0;
     border-radius: var(--radii);
     box-shadow: var(--shadow);
     overflow: hidden;
+
+    @media (min-width: 596px) {
+        margin: 1rem 1rem 1rem 0;
+    }
+
+    @media (min-width: 846px) {
+        &:nth-child(3n) {
+            margin-right: 0;
+        }
+    }
+
+    @media (min-width: 1112px) {
+        &:nth-child(3n) {
+            margin-right: 1rem;
+        }
+        &:nth-child(4n) {
+            margin-right: 0;
+        }
+    }
+
+    @media (min-width: 1378px) {
+        &:nth-child(4n) {
+            margin-right: 1rem;
+        }
+        &:nth-child(5n) {
+            margin-right: 0;
+        }
+    }
+
+    @media (min-width: 1112px) {
+        &:last-child {
+            margin-left: ${(props) =>
+                props.films && props.films.length % 4 && props.films.length % 5 !== 0 && '2rem'};
+        }
+    }
 `;
 const Cover = styled.img`
     width: 100%;
