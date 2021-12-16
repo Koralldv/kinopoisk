@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { IoArrowForwardOutline } from 'react-icons/io5';
 import { NavLink } from 'react-router-dom';
+import logos from '../img/logo.png';
 
 export const Footer = ({ links, social }) => {
     const setActive = ({ isActive }) => (isActive ? 'activeLinkNav' : 'notActiveLinkNav');
@@ -16,7 +17,9 @@ export const Footer = ({ links, social }) => {
                                 <NavLink key={`${link.name}`} className={setActive} to={link.path}>
                                     <ListLink>
                                         <ListItem>{link.name}</ListItem>
-                                        <IoArrowForwardOutline size="12px" />
+                                        <Icon>
+                                            <IoArrowForwardOutline size="12px" />
+                                        </Icon>
                                     </ListLink>
                                 </NavLink>
                             ))}
@@ -24,9 +27,10 @@ export const Footer = ({ links, social }) => {
                     ))}
             </Nav>
             <About>
-                {/* <Logo></Logo> */}
-                <div>Logo</div>
-                <Slogan>Кино только начинается…</Slogan>
+                <LogoWrap>
+                    <Logo src={logos} />
+                </LogoWrap>
+                <Slogan>KINODOMA</Slogan>
                 <Social>
                     {social.map((s) => (
                         <SocialLink key={`${s.name}`} title={s.name} href={`${s.link}`}>
@@ -40,19 +44,22 @@ export const Footer = ({ links, social }) => {
 };
 
 const Wrap = styled.footer`
-    padding: 2rem;
-
+    padding: 2rem 1rem;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     background-color: var(--colors-ui-base);
     box-shadow: var(--shadow);
     flex-direction: column;
+    justify-content: flex-end;
+
+    @media (min-width: 689px) {
+        justify-content: space-between;
+    }
 
     @media (min-width: 456px) {
-        flex-direction: row;
-        padding: 3rem 2rem 4rem;
+        flex-direction: row-reverse;
+        padding: 3rem 2rem;
     }
 `;
 
@@ -61,17 +68,34 @@ const Nav = styled.div`
 `;
 
 const About = styled.div`
-    max-width: 400px;
+    max-width: 320px;
+    width: 100%;
 `;
-// const Logo = styled.img``;
+
+const LogoWrap = styled.div`
+    width: 64px;
+    height: 64px;
+    margin: 2rem 0 0.5rem;
+    @media (min-width: 689px) {
+        margin: 0 0 0.5rem;
+    }
+
+    @media (min-width: 768px) {
+        margin: 0 0 0.5rem;
+    }
+`;
+
+const Logo = styled.img`
+    width: 100%;
+`;
+
 const Slogan = styled.span`
-    font-size: var(--fz-md);
-    font-weight: var(--fw-normal);
+    font-size: var(--fz-xl);
+    font-weight: var(--fw-bold);
     color: var(--colors-text);
 `;
 const Social = styled.ul`
     list-style: none;
-    margin: 0;
     padding: 0;
     display: flex;
     margin: 1rem 0;
@@ -81,11 +105,15 @@ const SocialItem = styled.li`
 `;
 const List = styled.ul`
     list-style: none;
-    margin: 0 2rem 0 0;
+    margin: 0 1rem 0 0;
     padding: 0;
     @media (max-width: 456px) {
         margin-bottom: 1rem;
     }
+`;
+
+const Icon = styled.i`
+    display: flex;
 `;
 
 const ListTitle = styled.span`
@@ -117,6 +145,7 @@ const ListLink = styled.span`
     transition: color 0.2s linear;
     display: flex;
     align-items: center;
+    width: max-content;
 
     &:hover {
         color: red;
