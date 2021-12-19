@@ -181,11 +181,11 @@ export const Films = () => {
 
 const Wrapper = styled.div`
     width: 100%;
-    padding: 1rem;
+    padding: 1rem 1rem 0;
     background-color: var(--bg-color);
 
     @media (min-width: 768px) {
-        padding: 6rem 2rem;
+        padding: 6rem 1rem 0;
     }
 `;
 
