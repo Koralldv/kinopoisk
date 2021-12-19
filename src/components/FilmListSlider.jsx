@@ -63,13 +63,21 @@ export const FilmListSlider = ({
                                                 <Title>{item.nameRu}</Title>
                                             </Link>
                                             <List>
-                                                <Year>{item.year}</Year>
-                                                {item.genres.map((g, index) => (
-                                                    <Genre key={`${g.genre}_${index}`}>
-                                                        {g.genre}
-                                                    </Genre>
-                                                ))}
+                                                <Year>
+                                                    <ListTitle>Год:</ListTitle>
+                                                    <Genre>{item.year}</Genre>
+                                                </Year>
+
+                                                <GenreWrapper>
+                                                    <ListTitle>Жанр:</ListTitle>
+                                                    {item.genres.map((g, index) => (
+                                                        <Genre key={`${g.genre}_${index}`}>
+                                                            {g.genre}
+                                                        </Genre>
+                                                    ))}
+                                                </GenreWrapper>
                                             </List>
+
                                             <Like
                                                 className={
                                                     likeList.includes(
@@ -99,6 +107,8 @@ const CardWrapper = styled.div`
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    background-color: var(--colors-bg);
+    box-shadow: var(--shadow);
 `;
 
 const TitleBlock = styled.h3`
@@ -147,7 +157,7 @@ const Title = styled.h3`
     color: var(--colors-text);
     font-weight: var(--fw-bold);
     font-size: 13px;
-    margin: 1.3rem 0.5rem 1rem 0.5rem;
+    margin: 1.3rem 0rem 1rem 1rem;
     text-transform: uppercase;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -161,18 +171,28 @@ const Title = styled.h3`
 
 const List = styled.ul`
     list-style: none;
-    margin: 0 0.5rem 1rem;
+    margin: 0 1rem 1rem;
     padding: 0;
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
 `;
 const Year = styled.li`
-    margin: 0 1rem 0 0;
+    display: flex;
+    margin: 0;
     padding: 0;
     font-size: var(--fz-sm);
     font-weight: var(--fw-normal);
     color: var(--colors-text);
-    opacity: 0.6;
+`;
+
+const GenreWrapper = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0.2rem 0 0 0;
+    font-size: var(--fz-sm);
+    font-weight: var(--fw-normal);
+    color: var(--colors-text);
 `;
 
 // const Age = styled.li`
@@ -192,6 +212,7 @@ const Genre = styled.li`
     color: var(--colors-text);
     opacity: 0.6;
     text-transform: capitalize;
+    opacity: 0.6;
 `;
 
 // const PaginationBlock = styled.div`
@@ -209,4 +230,11 @@ const Like = styled.i`
     &.active {
         color: var(--active-color);
     }
+`;
+
+const ListTitle = styled.div`
+    font-size: var(--fz-sm);
+    font-weight: var(--fw-bold);
+    color: var(--active-color);
+    padding: 0 0.5rem 0 0;
 `;

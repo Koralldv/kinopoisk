@@ -48,8 +48,7 @@ const Wrap = styled.footer`
     display: flex;
     flex-wrap: wrap;
     align-items: flex-start;
-    background-color: var(--colors-bg);
-    box-shadow: var(--shadow);
+    background-color: var(--colors-ui-base);
     flex-direction: column;
     justify-content: flex-end;
 

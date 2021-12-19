@@ -68,7 +68,7 @@ export const Header = ({ links, social }) => {
                                     </SocialItem>
                                 </SocialLink>
                             ))}
-                        </Social>{' '}
+                        </Social>
                     </Menu>
                 ) : (
                     ''

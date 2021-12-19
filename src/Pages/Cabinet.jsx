@@ -116,7 +116,7 @@ const LikedFilm = styled.div`
     @media (min-width: 768px) {
         margin: 0 2rem 2rem 0;
         width: 222px;
-        height: 470px;
+        height: auto;
     }
 `;
 

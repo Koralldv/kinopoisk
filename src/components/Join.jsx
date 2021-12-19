@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Button } from './Button';
+// import { Button } from './Button';
 
 export const Join = () => {
     return (
@@ -18,7 +18,7 @@ export const Join = () => {
                     just the general traits of a friendship. To experience what is friendship, one
                     must have true friends, who are indeed rare treasure.
                 </Description>
-                <Button>Подписка</Button>
+                {/* <Button>Подписка</Button> */}
             </Info>
         </Wrapper>
     );

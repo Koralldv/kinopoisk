@@ -56,7 +56,8 @@ export const Premiere = () => {
                         slidesPerView: 6,
                         slidesPerGroup: 6,
                     },
-                }}></FilmListSlider>
+                }}
+            />
 
             {error && error}
         </Wrapper>
@@ -66,7 +67,6 @@ export const Premiere = () => {
 const Wrapper = styled.div`
     width: 100%;
     padding: 4rem 1rem 2rem;
-    background-color: var(--bg-color);
 
     @media (min-width: 725px) {
         padding: 6rem 1rem 2rem;

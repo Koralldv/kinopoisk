@@ -12,8 +12,12 @@ export const FilmCardsList = ({ films }) => {
                             <CardTitle>{f.nameRu}</CardTitle>
                         </Link>
                         <List>
-                            <Year>год: {f.year}</Year>
+                            <Year>
+                                <ListTitle>Год:</ListTitle>
+                                <Genre>{f.year}</Genre>
+                            </Year>
                             <GenreWrapper>
+                                <ListTitle>Жанр:</ListTitle>
                                 {f.genres.map((g, index) => (
                                     <Genre key={`${g.genre}_${index}`}>{g.genre}</Genre>
                                 ))}
@@ -76,8 +80,8 @@ const Cover = styled.img`
 const CardTitle = styled.h3`
     color: var(--colors-text);
     font-weight: var(--fw-bold);
-    font-size: 13px;
-    margin: 1.3rem 0.5rem 1rem 0.5rem;
+    font-size: 12px;
+    margin: 1rem 1rem 0.5rem;
     text-transform: uppercase;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -90,7 +94,7 @@ const CardTitle = styled.h3`
 `;
 const List = styled.ul`
     list-style: none;
-    margin: 0 0.5rem 1rem;
+    margin: 0 1rem 1rem;
     padding: 0;
     display: flex;
     flex-direction: column;
@@ -102,21 +106,28 @@ const Year = styled.li`
     font-size: var(--fz-sm);
     font-weight: var(--fw-normal);
     color: var(--colors-text);
-    opacity: 0.6;
+    display: flex;
 `;
 
 const GenreWrapper = styled.div`
     display: flex;
     flex-wrap: wrap;
-    padding-button: 1rem;
+    padding: 0.2rem 0 0 0;
+    font-size: var(--fz-sm);
+    font-weight: var(--fw-normal);
+    color: var(--colors-text);
+`;
+
+const ListTitle = styled.div`
+    font-size: var(--fz-sm);
+    font-weight: var(--fw-bold);
+    color: var(--active-color);
+    padding: 0 0.5rem 0 0;
 `;
 
 const Genre = styled.li`
     margin: 0 1rem 0 0;
-    padding: 0;
-    font-size: var(--fz-sm);
-    font-weight: var(--fw-normal);
-    color: var(--colors-text);
-    opacity: 0.6;
+    padding: 0 0 0.1rem 0;
     text-transform: capitalize;
+    opacity: 0.6;
 `;

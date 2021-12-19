@@ -145,7 +145,7 @@ const FilmTitle = styled.h1`
     font-weight: var(--fw-bold);
     margin: 0;
     background-color: var(--colors-ui-base);
-    padding: 0.5rem 0;
+    padding: 0.5rem;
     border-radius: var(--radii);
     box-shadow: var(--shadow);
 
@@ -157,6 +157,7 @@ const FilmTitle = styled.h1`
         background-color: transparent;
         border-radius: none;
         box-shadow: none;
+        padding: 0.5rem 0;
     }
 `;
 
@@ -173,8 +174,9 @@ const Year = styled.span`
     font-weight: var(--fw-normal);
     font-size: var(--fz-md);
     background-color: var(--colors-ui-base);
+    border: 2px solid var(--active-color);
     padding: 0.5rem 1rem;
-    border-radius: var(--radii);
+    border-radius: 50px;
     box-shadow: var(--shadow);
     @media (min-width: 768px) {
         background-color: transparent;
@@ -207,7 +209,8 @@ const Duration = styled.span`
     font-size: var(--fz-md);
     background-color: var(--colors-ui-base);
     padding: 0.5rem 1rem;
-    border-radius: var(--radii);
+    border: 2px solid var(--active-color);
+    border-radius: 50px;
     box-shadow: var(--shadow);
 
     @media (min-width: 768px) {
