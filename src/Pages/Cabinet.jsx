@@ -121,7 +121,7 @@ const LikedFilm = styled.div`
 `;
 
 const Icon = styled.i`
-    color: red;
+    color: var(--active-color);
     margin-left: 1rem;
 `;
 

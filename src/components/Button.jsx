@@ -49,9 +49,9 @@ const Btn = styled.button`
         props.padding && props.padding === 'left' ? 'row-reverse' : 'row'};
     margin: ${(props) => (props.margin ? props.margin : '1rem 1rem 1rem 0')};
     background-color: ${(props) =>
-        props.isActive === 'active' || props.isActive === 'active' ? 'red' : ''};
-    background-color: ${(props) => (props.isDelete ? 'red' : '')};
-    background-color: ${(props) => (props.isSucces ? '#0cca4a' : '')};
+        props.isActive === 'active' || props.isActive === 'active' ? 'var(--active-color)' : ''};
+    background-color: ${(props) => (props.isDelete ? 'var(--active-color)' : '')};
+    background-color: ${(props) => (props.isSucces ? '#78f24e' : '')};
 
     color: ${(props) => (props.isDelete || props.isSucces ? '#fff' : '')};
 `;

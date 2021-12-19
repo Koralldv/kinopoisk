@@ -155,7 +155,7 @@ const Title = styled.h3`
     transition: color 0.2s linear;
 
     &:hover {
-        color: red;
+        color: var(--active-color);
     }
 `;
 
@@ -207,6 +207,6 @@ const Like = styled.i`
     cursor: pointer;
 
     &.active {
-        color: red;
+        color: var(--active-color);
     }
 `;

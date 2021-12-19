@@ -388,7 +388,7 @@ const Like = styled.span`
     cursor: pointer;
 
     &.active {
-        color: red;
+        color: var(--active-color);
     }
 
     @media (min-width: 768px) {

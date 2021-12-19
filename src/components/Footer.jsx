@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { IoArrowForwardOutline } from 'react-icons/io5';
 import { NavLink } from 'react-router-dom';
-import logo from '../img/logo.png';
+import logo from '../img/logo.svg';
 
 export const Footer = ({ links, social }) => {
     const setActive = ({ isActive }) => (isActive ? 'activeLinkNav' : 'notActiveLinkNav');
@@ -48,7 +48,7 @@ const Wrap = styled.footer`
     display: flex;
     flex-wrap: wrap;
     align-items: flex-start;
-    background-color: var(--colors-ui-base);
+    background-color: var(--colors-bg);
     box-shadow: var(--shadow);
     flex-direction: column;
     justify-content: flex-end;
@@ -136,7 +136,7 @@ const SocialLink = styled.a`
     transition: color 0.2s linear;
 
     &:hover {
-        color: red;
+        color: var(--active-color);
     }
 `;
 
@@ -149,6 +149,6 @@ const ListLink = styled.span`
     margin-bottom: 0.2rem;
 
     &:hover {
-        color: red;
+        color: var(--active-color);
     }
 `;

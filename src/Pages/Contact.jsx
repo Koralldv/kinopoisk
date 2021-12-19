@@ -158,7 +158,7 @@ const Botton = styled.input`
     border: none;
     width: 100%;
     box-shadow: var(--shadow);
-    background-color: red;
+    background-color: var(--active-color);
     color: #fff;
     font-weight: var(--fw-bold);
     text-transform: uppercase;
@@ -175,7 +175,7 @@ const InputName = styled.span`
 `;
 
 const Error = styled.span`
-    color: red;
+    color: var(--active-color);
     font-size: var(--fz-md);
     margin: 0.5rem 0 0;
     display: flex;

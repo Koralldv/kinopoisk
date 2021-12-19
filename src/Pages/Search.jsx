@@ -181,7 +181,7 @@ const Error = styled.div`
     display: flex;
     justify-content: center;
     padding: 1rem 0;
-    background-color: red;
+    background-color: var(--active-color);
     color: #fff;
     font-size: var(--fz-sm);
     font-weight: var(--fw-normal);

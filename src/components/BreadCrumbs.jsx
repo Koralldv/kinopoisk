@@ -81,7 +81,7 @@ const LinkItem = styled(Link)`
 `;
 
 const PageName = styled.span`
-    color: red;
+    color: var(--active-color);
     font-size: var(--fz-md);
     font-weight: var(--fw-small);
 `;

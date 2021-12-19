@@ -9,7 +9,10 @@ export const Statistics = ({ stats }) => {
                 {stats.map((stat) => (
                     <StatItem key={stat.title}>
                         <Icon>
-                            {React.createElement(stat.сomp, { size: '55px', color: 'red' })}
+                            {React.createElement(stat.сomp, {
+                                size: '55px',
+                                color: 'var(--active-color)',
+                            })}
                         </Icon>
                         <Amount>{stat.amount}</Amount>
                         <ItemTitle>{stat.title}</ItemTitle>

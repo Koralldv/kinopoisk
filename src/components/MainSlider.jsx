@@ -74,7 +74,7 @@ export const MainSlider = () => {
                                             icon={IoHeart}
                                             iconColor={
                                                 likeList.includes(item.kinopoiskId || item.filmId)
-                                                    ? 'red'
+                                                    ? 'var(--active-color)'
                                                     : ''
                                             }
                                             padding="right"
@@ -188,7 +188,7 @@ const Genre = styled.span`
     color: var(--colors-text);
     font-weight: var(--fw-normal);
     font-size: var(--fz-md);
-    border: 2px solid red;
+    border: 2px solid var(--active-color);
     padding: 0.5rem 1rem;
     border-radius: 50px;
     background-color: var(--colors-ui-base);

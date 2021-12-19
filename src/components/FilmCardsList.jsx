@@ -31,6 +31,7 @@ const Card = styled.div`
     border-radius: var(--radii);
     box-shadow: var(--shadow);
     overflow: hidden;
+    background-color: var(--colors-ui-base);
 
     @media (min-width: 596px) {
         margin: 1rem 1rem 1rem 0;
@@ -84,7 +85,7 @@ const CardTitle = styled.h3`
     transition: color 0.2s linear;
 
     &:hover {
-        color: red;
+        color: var(--active-color);
     }
 `;
 const List = styled.ul`

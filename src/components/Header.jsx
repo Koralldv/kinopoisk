@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { IoSearchSharp, IoMoon, IoMoonOutline, IoPerson, IoReorderFour } from 'react-icons/io5';
 import { NavLink } from 'react-router-dom';
 
-import logo from '../img/logo.png';
+import logo from '../img/logo.svg';
 import { useSelector } from 'react-redux';
 
 export const Header = ({ links, social }) => {
@@ -118,7 +118,7 @@ const Wrapper = styled.div`
 `;
 
 const Head = styled.header`
-    background-color: var(--colors-ui-basebg);
+    background-color: var(--colors-ui-base);
     width: 100%;
     height: 100%;
     display: flex;
@@ -132,7 +132,7 @@ const Head = styled.header`
 
 const Burger = styled.span`
     color: #fff;
-    background-color: red;
+    background-color: var(--active-color);
     height: 64px;
     width: 64px;
     display: flex;
@@ -176,7 +176,7 @@ const MenuItem = styled.li`
     font-weight: var(--fw-normal);
 
     &: hover {
-        background-color: red;
+        background-color: var(--active-color);
         color: #fff;
         svg {
             color: #fff;
@@ -261,7 +261,7 @@ const SocialLink = styled.a`
     transition: color 0.2s linear;
 
     &:hover {
-        color: red;
+        color: var(--active-color);
     }
 `;
 
