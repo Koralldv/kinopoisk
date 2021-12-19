@@ -16,9 +16,9 @@ export const Slider = ({
             spaceBetween={spaceBetween}
             slidesPerGroup={slidesPerGroup}
             slidesPerView={slidesPerView}
-            pagination={{
-                el: '.swiper-paginations',
-            }}
+            // pagination={{
+            //     el: '.swiper-paginations',
+            // }}
             navigation={{
                 nextEl: `.${sliderName}__next`,
                 prevEl: `.${sliderName}__prev`,
