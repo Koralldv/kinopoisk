@@ -129,7 +129,8 @@ const FullPageLink = styled(Link)`
 const Card = styled.div`
     width: 100%;
     max-width: 250px;
-    height: 450px;
+    height: auto;
+    padding: 0 0 0.5rem;
     margin: 2rem auto 4rem auto;
     border-radius: var(--radii);
     box-shadow: var(--shadow);
