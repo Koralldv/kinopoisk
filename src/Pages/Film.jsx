@@ -90,35 +90,38 @@ export const Film = () => {
                         <List>
                             <ListItem>
                                 <IconWrap>
-                                    <IoPersonSharp size="20px" />
+                                    <IoPersonSharp />
                                 </IconWrap>
                                 {film.ratingAgeLimits !== null ? film.ratingAgeLimits.slice(3) : 0}+
                             </ListItem>
                             <ListItem>
                                 <IconWrap>
-                                    <IoTimeOutline size="24px" />
+                                    <IoTimeOutline />
                                 </IconWrap>
                                 {Math.floor(film.filmLength / 60)}ч {film.filmLength % 60}м
                             </ListItem>
                             <ListItem>
                                 <IconWrap>
-                                    <IoHappyOutline size="24px" />
+                                    <IoHappyOutline />
                                 </IconWrap>
                                 {film.year}
                             </ListItem>
-
-                            <IconWrap>
-                                <IoFootballOutline size="24px" />
-                            </IconWrap>
-                            {film.genres.map((g) => (
-                                <ListItem key={`${g.genre}`}>{g.genre}</ListItem>
-                            ))}
-                            <IconWrap>
-                                <IoPlanetOutline size="24px" />
-                            </IconWrap>
-                            {film.countries.map((c) => (
-                                <ListItem key={`${c.country}`}>{c.country}</ListItem>
-                            ))}
+                            <ListItem>
+                                <IconWrap>
+                                    <IoFootballOutline />
+                                </IconWrap>
+                                {film.genres.map((g) => (
+                                    <li key={`${g.genre}`}>{g.genre}</li>
+                                ))}
+                            </ListItem>
+                            <ListItem>
+                                <IconWrap>
+                                    <IoPlanetOutline />
+                                </IconWrap>
+                                {film.countries.map((c) => (
+                                    <li key={`${c.country}`}>{c.country}</li>
+                                ))}
+                            </ListItem>
                         </List>
                         <Description>{film.description}</Description>
                         <Persons>
@@ -139,7 +142,7 @@ export const Film = () => {
                                             : ''
                                     }
                                     onClick={() => handleLike(film.kinopoiskId || film.filmId)}>
-                                    <IoHeartSharp size="20px" />
+                                    <IoHeartSharp size="32px" />
                                 </Like>
                                 <KinoLink
                                     href={`https://www.kinopoisk.ru/film/${filmId}`}
@@ -191,6 +194,7 @@ export const Film = () => {
 
 const Wrapper = styled.div`
     margin: 56px 1rem 2rem;
+
     @media (min-width: 425px) {
         margin: 56px 2rem 2rem;
     }
@@ -199,6 +203,7 @@ const Wrapper = styled.div`
 const About = styled.div`
     display: flex;
     align-items: space-between;
+
     @media (max-width: 768px) {
         flex-wrap: wrap;
     }
@@ -220,6 +225,7 @@ const Badges = styled.div`
 
 const Img = styled.img`
     width: 350px;
+
     @media (max-width: 768px) {
         width: 100%;
         max-width: 300px;
@@ -228,9 +234,11 @@ const Img = styled.img`
 
 const Info = styled.div`
     margin-left: 2rem;
+    width: 100%;
     @media (max-width: 1024px) {
-        width: 50%;
+        width: content;
     }
+
     @media (max-width: 768px) {
         width: 100%;
         margin-left: 0;
@@ -260,11 +268,25 @@ const List = styled.ul`
 const ListItem = styled.li`
     display: flex;
     align-items: center;
+    justify-content: flex-start;
     margin: 0 2rem 1rem 0;
     font-size: var(--fz-md);
     font-weight: var(--fw-normal);
     color: var(--colors-text);
     text-transform: capitalize;
+    flex-wrap: wrap;
+
+    li {
+        margin: 0 1rem 0 0;
+    }
+
+    :nth-child(n + 4) {
+        width: 100%;
+    }
+
+    @media (max-width: 768px) {
+        margin: 0 1rem 1rem 0;
+    }
 `;
 
 const Description = styled.p`
@@ -276,7 +298,7 @@ const Description = styled.p`
 const Persons = styled.div`
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
     flex-wrap: wrap;
     margin-top: 2rem;
 `;
@@ -302,6 +324,7 @@ const Star = styled.div`
 const KinoLink = styled.a`
     text-decoration: none;
     color: var(--colors-text);
+    height: 50px;
 `;
 
 const Mark = styled.span`
@@ -322,33 +345,45 @@ const Kinopoinsk = styled.span`
 `;
 
 const SliderWrap = styled.div`
-    max-width: 800px;
     width: 100%;
+
+    @media (min-width: 769px) {
+        max-width: calc(100vw - 350px - 6rem);
+    }
+
+    @media (min-width: 1460px) {
+        max-width: 800px;
+    }
 `;
 
 const ImgSlide = styled.img`
     width: 100%;
     height: 220px;
+    object-fit: contain;
 `;
 
 const PaginationBlock = styled.div`
     text-align: center;
 `;
 
-const IconWrap = styled.span`
+const IconWrap = styled.i`
     display: flex;
     justify-content: center;
     padding-right: 0.5rem;
+    font-size: 1.5rem;
 `;
 
-const Like = styled.div`
+const Like = styled.span`
     background-color: var(--colors-ui-base);
     box-shadow: var(--shadow);
     border-radius: var(--radii);
-    padding: 1rem;
-    height: 52px;
+    padding: 0;
+    height: 50px;
     margin: 0 1rem 1rem 0;
-    width: min-content;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
     color: #eee;
     cursor: pointer;
 
