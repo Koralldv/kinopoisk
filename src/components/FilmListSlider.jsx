@@ -81,13 +81,13 @@ export const FilmListSlider = ({
                                                 onClick={() =>
                                                     handleLike(item.kinopoiskId || item.filmId)
                                                 }>
-                                                <IoHeartSharp size="20px" />
+                                                <IoHeartSharp size="32px" />
                                             </Like>
                                         </Card>
                                     </SwiperSlide>
                                 ))}
                         </CardWrapper>
-                        <PaginationBlock className="swiper-paginations"></PaginationBlock>
+                        {/* <PaginationBlock className="swiper-paginations"></PaginationBlock> */}
                     </Slider>
                 </>
             )}
@@ -128,16 +128,20 @@ const FullPageLink = styled(Link)`
 
 const Card = styled.div`
     width: 100%;
-    height: 420px;
-    margin: 2rem 0 1rem;
+    max-width: 250px;
+    height: 450px;
+    margin: 2rem auto 4rem auto;
     border-radius: var(--radii);
     box-shadow: var(--shadow);
+    position: relative;
 `;
+
 const Cover = styled.img`
     width: 100%;
-    height: 300px;
+    height: 350px;
     object-fit: cover;
 `;
+
 const Title = styled.h3`
     color: var(--colors-text);
     font-weight: var(--fw-bold);
@@ -153,6 +157,7 @@ const Title = styled.h3`
         color: red;
     }
 `;
+
 const List = styled.ul`
     list-style: none;
     margin: 0 0.5rem 1rem;
@@ -168,6 +173,7 @@ const Year = styled.li`
     color: var(--colors-text);
     opacity: 0.6;
 `;
+
 // const Age = styled.li`
 //     margin: 0 1rem 0 0;
 //     padding: 0;
@@ -187,14 +193,14 @@ const Genre = styled.li`
     text-transform: capitalize;
 `;
 
-const PaginationBlock = styled.div`
-    text-align: center;
-    margin-bottom: 4rem;
-`;
+// const PaginationBlock = styled.div`
+//     text-align: center;
+//     margin-bottom: 4rem;
+// `;
 
-const Like = styled.div`
+const Like = styled.i`
     position: absolute;
-    top: 3rem;
+    top: 1rem;
     right: 1rem;
     color: #eee;
     cursor: pointer;
