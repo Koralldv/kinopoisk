@@ -2,7 +2,7 @@
   "name": "kino",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://koralldv.github.io/kinopoisk/",
+  "homepage": "https://koralldv.github.io/",
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.2",
     "@testing-library/jest-dom": "^5.11.4",
